@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65566075c1f60584cb79a92757da86f5, type: 3}
+  m_Name: workMandu
+  m_EditorClassIdentifier: 
+  id: 2
+  tagString: mandu
+  usable: 0
+  dispoasable: 0
+  power: {fileID: 11400000, guid: ca7f39961c046b84885bcdea91e76d16, type: 2}
