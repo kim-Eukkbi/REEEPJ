@@ -47,7 +47,7 @@ public class Test : MonoBehaviour
     {
         gameObject.transform.SetParent(fieldRectParent, true);
         gameObject.transform.localPosition = Vector3.zero;
-        gameObject.transform.Translate(new Vector3(.03f, .03f, 0) * cardList.Count);
+        gameObject.transform.Translate(new Vector3(.03f, .03f, -.03f) * cardList.Count);
         cardList.Add(gameObject);
         gameObject.GetComponent<CardHandler>().UseCard();
     }

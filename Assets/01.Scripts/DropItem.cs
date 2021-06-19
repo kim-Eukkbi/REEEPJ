@@ -36,7 +36,6 @@ public class DropItem : MonoBehaviour , IPointerDownHandler , IPointerUpHandler
     {
         rectTransform = GetComponent<RectTransform>();
         clampRectTransform = rectTransform.root.GetComponent<RectTransform>();
-        /*droppedArea = GetComponentInParent<DropArea>();*/
     }
 
     public void SetDroppedArea(DropArea dropArea)

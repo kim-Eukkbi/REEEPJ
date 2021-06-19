@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   tagString: mandu
-  usable: 1
+  damage: 0
+  usable: 0
   dispoasable: 0
   power: {fileID: 11400000, guid: 406315fb0d6b16e4f895dac89b2919dd, type: 2}

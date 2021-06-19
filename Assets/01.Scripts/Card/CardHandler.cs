@@ -7,12 +7,14 @@ public class CardHandler : MonoBehaviour
 {
     public Card card;
    
-    
     public GameObject DecObj;
     public Image illuset;
     public Text cardName;
     public Text cardDamage;
     public string cardDescription;
+    public GameObject NowDamage;
+    public GameObject totalDamage;
+
 
     public void Awake()
     {
@@ -23,14 +25,14 @@ public class CardHandler : MonoBehaviour
     {
         DecObj = GameObject.Find("DesObj");
         card = drawCard;
-        illuset.sprite = drawCard.power.illuset;
-        cardName.text = drawCard.power.cardName;
-        cardDamage.text = "Power :" + drawCard.power.cardDamage.ToString();
-        cardDescription = drawCard.power.cardDescription;
+        illuset.sprite = card.power.illuset;
+        cardName.text = card.power.cardName;
+        cardDamage.text = "Power :" + card.power.cardDamage.ToString();
+        cardDescription = card.power.cardDescription;
     }
 
     public void UseCard()
     {
-        card.OnUse();
+        DamageManager.Instance.SetDamage(card.damage);
     }
 }

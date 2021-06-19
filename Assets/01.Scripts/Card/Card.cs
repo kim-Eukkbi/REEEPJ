@@ -13,30 +13,31 @@ public class Card : ScriptableObject
     public bool usable;
     public bool dispoasable;
 
+
     public CardPower power;
 
-    public void Init(string _id, string _tagString, float _damege,
+    public void Init(string _id, string _tagString,
         CardPower defualtCP,bool dispose = false,bool usable = true)
     {
+        power = defualtCP;
         this.id = _id;
         this.tagString = _tagString;
-        this.damage = _damege;
+        this.damage = power.cardDamage;
         this.dispoasable = dispose;
         this.usable = usable;
-        power = defualtCP;
     }
 
     public Card clone(bool setDispose = false)
     {
         var card = CreateInstance<Card>();
         bool dispose = setDispose || this.dispoasable;
-        card.Init(id, tagString,damage, power, dispose);
+        card.Init(id, tagString, power, dispose,usable);
         return card;
     }
 
-    public void OnUse()
+    public float OnUse()
     {
-        Debug.Log("Use Card :" + power.cardName);
+        return this.damage;
     }
 
     public void OnDraw()
