@@ -100,7 +100,7 @@ public class DropItem : MonoBehaviour , IPointerDownHandler , IPointerUpHandler
 
         RectTransformUtility.ScreenPointToWorldPointInRectangle(clampRectTransform, eventData.position
         , eventData.pressEventCamera, out DescPos);
-        descriptionObj.transform.position = DescPos + new Vector3(2.3f, 1.3f, 0);
+        descriptionObj.transform.position = DescPos + new Vector3(2.3f, 1.3f, -3f);
 
         Vector3 worldPos = rectTransform.position;
         worldPos.x = Mathf.Clamp(rectTransform.position.x, minWorldPos.x, maxWorldPos.x);

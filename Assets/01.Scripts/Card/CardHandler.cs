@@ -16,9 +16,9 @@ public class CardHandler : MonoBehaviour
     public GameObject totalDamage;
 
 
-    public void Awake()
+    public void Start()
     {
-//        Initialize(card);
+
     }
 
     public void Initialize(Card drawCard)
@@ -33,6 +33,11 @@ public class CardHandler : MonoBehaviour
 
     public void UseCard()
     {
-        DamageManager.Instance.SetDamage(card.damage);
+        if (DamageManager.Instance.nowDamage <= card.damage)
+            DamageManager.Instance.SetDamage(card.damage, true);
+        else
+        {
+            DamageManager.Instance.SetDamage(card.damage, false);
+        }
     }
 }

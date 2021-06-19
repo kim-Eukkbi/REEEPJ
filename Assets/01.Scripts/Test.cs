@@ -13,8 +13,7 @@ public class Test : MonoBehaviour
     public RectTransform hoverRectParent;
 
 
-    public List<GameObject> cardList;
-
+    public CardManager cardManager;
 
     private void Awake()
     {
@@ -24,8 +23,8 @@ public class Test : MonoBehaviour
 
         fieldArea.onLifted += ObjectLiftedFromfield;
         fieldArea.onDropped += ObjectDroppedfield;
-        cardList = new List<GameObject>();
     }
+
 
 
     private void ObjectLiftedFromPlayer(DropArea area, GameObject gameObject)
@@ -45,10 +44,10 @@ public class Test : MonoBehaviour
 
     private void ObjectDroppedfield(DropArea area, GameObject gameObject)
     {
+        cardManager.UsedCard(gameObject);
         gameObject.transform.SetParent(fieldRectParent, true);
         gameObject.transform.localPosition = Vector3.zero;
-        gameObject.transform.Translate(new Vector3(.03f, .03f, -.03f) * cardList.Count);
-        cardList.Add(gameObject);
+        gameObject.transform.Translate(new Vector3(.03f, .03f, -0.3f) * cardManager.cardsUsed.Count);
         gameObject.GetComponent<CardHandler>().UseCard();
     }
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: "\uC77C\uD558\uB294\uB9CC\uB450"
   cardDescription: "\uC77C\uB54C\uBB38\uC5D0 \uB9E8\uD0C8\uC774 \uB098\uAC00\uBC84\uB9B0
     \uB9CC\uB450\uB2E4"
-  cardDamage: 50
+  cardDamage: 20
   seqOnUse: "\uBE61\uCE68\uB54C\uBB38\uC5D0 \uC0AC\uC6A9\uD558\uBA74 \uB310\uC9C0\uB97C
     \uB123\uB294\uB2E4"
   seqOnDraw: 

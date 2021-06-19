@@ -18,8 +18,9 @@ public class CardManager : MonoBehaviour
     public Deck initialDeck;
     private Deck playerDeck;
 
+    public List<CardHandler> cardsOnSpwan;
     public List<CardHandler> cardsInHand;
-   // public List<CardHandler> cardsUsed;
+    public List<CardHandler> cardsUsed;
 
     private int firstCount =0;
     private bool isEndCardSpawn = false;
@@ -35,9 +36,16 @@ public class CardManager : MonoBehaviour
     {
         if (isEndCardSpawn)
         {
-            GameObject drawCard = cardsInHand[firstCount - 1].gameObject;
-            DrawSeq(drawCard);
-            firstCount--;
+            if(cardsInHand.Count < 9)
+            {
+                GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
+                DrawSeq(drawCard);
+                firstCount--;
+            }
+            else
+            {
+                Debug.LogWarning("소지할 수 있는 카드의 양을 넘었습니다");
+            }
         }
         else
         {
@@ -49,7 +57,10 @@ public class CardManager : MonoBehaviour
     {
         Sequence drawSeq = DOTween.Sequence();
         Vector3 drawCardPos = drawCard.transform.position;
-        drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 3, drawCardPos.y, drawCardPos.z), .5f));
+        CardHandler drawCardHandler = drawCard.GetComponent<CardHandler>();
+        cardsOnSpwan.Remove(drawCardHandler);
+        cardsInHand.Add(drawCardHandler);
+        drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 3, drawCardPos.y, drawCardPos.z - 2), .5f));
         drawSeq.Insert(.1f,drawCard.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f));
         drawSeq.Append(drawCard.transform.DOMove(cardInstantiateRectPos.position, .1f)).OnComplete(()=>
         {
@@ -68,7 +79,7 @@ public class CardManager : MonoBehaviour
             cardObject.transform.Translate(new Vector3(-.01f, .01f,.01f) * index);
             cardObject.GetComponent<CardHandler>().Initialize(card);
             cardObject.GetComponent<DropItem>().descriptionObj = DesObj;
-            cardsInHand.Add(cardObject.GetComponent<CardHandler>());
+            cardsOnSpwan.Add(cardObject.GetComponent<CardHandler>());
         }
         else
         {
@@ -86,5 +97,12 @@ public class CardManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         isEndCardSpawn = true;
+    }
+
+    public void UsedCard(GameObject UsedCard)
+    {
+        CardHandler usedCardHandler = UsedCard.GetComponent<CardHandler>();
+        cardsInHand.Remove(usedCardHandler);
+        cardsUsed.Add(usedCardHandler);
     }
 }

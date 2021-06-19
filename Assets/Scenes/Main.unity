@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 43073290}
   - component: {fileID: 43073291}
+  - component: {fileID: 43073292}
   m_Layer: 5
   m_Name: DamageManager
   m_TagString: Untagged
@@ -176,6 +177,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nowDamageText: {fileID: 1007666366}
   totalDamageText: {fileID: 1109226118}
+  Hptext: {fileID: 1320303757}
+  Hpbar: {fileID: 1213338192}
+  totalDamage: 0
+  nowDamage: 0
+  hp: 0
+--- !u!225 &43073292
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43073289}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &106066353
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +205,7 @@ GameObject:
   - component: {fileID: 106066354}
   - component: {fileID: 106066356}
   - component: {fileID: 106066355}
+  - component: {fileID: 106066357}
   m_Layer: 5
   m_Name: NowDamage
   m_TagString: Untagged
@@ -252,6 +271,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106066353}
   m_CullTransparentMesh: 1
+--- !u!225 &106066357
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106066353}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &157342919
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,9 +934,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1084110774}
+  - component: {fileID: 1084110776}
   - component: {fileID: 1084110775}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: CardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -953,7 +985,30 @@ MonoBehaviour:
   playerRectParent: {fileID: 876592470}
   fieldRectParent: {fileID: 1687082777}
   hoverRectParent: {fileID: 2060973632}
-  cardList: []
+  cardManager: {fileID: 1084110776}
+--- !u!114 &1084110776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084110773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a63e17f85ecc44f816f7bd165016f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 5129005323026642747, guid: 98d0e74eddba5dd46b94d9bd235bbf19, type: 3}
+  cardInstantiateRectPos: {fileID: 876592470}
+  cardInstantiatePos: {fileID: 1002258147}
+  defaultDropArea: {fileID: 1719110001}
+  DesObj: {fileID: 2036133778}
+  NowDamage: {fileID: 106066353}
+  TotalDamage: {fileID: 1365388443}
+  initialDeck: {fileID: 11400000, guid: 56b62cabc5725d54589a8da24fd09846, type: 2}
+  cardsOnSpwan: []
+  cardsInHand: []
+  cardsUsed: []
 --- !u!1 &1109226116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1213338193}
   - component: {fileID: 1213338194}
+  - component: {fileID: 1213338195}
   m_Layer: 5
   m_Name: HpBar
   m_TagString: Untagged
@@ -1123,6 +1179,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &1213338195
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213338192}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1320303755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1281,7 @@ GameObject:
   - component: {fileID: 1365388444}
   - component: {fileID: 1365388446}
   - component: {fileID: 1365388445}
+  - component: {fileID: 1365388447}
   m_Layer: 5
   m_Name: TotalDamage
   m_TagString: Untagged
@@ -1278,6 +1347,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365388443}
   m_CullTransparentMesh: 1
+--- !u!225 &1365388447
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365388443}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1493862200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,58 +1667,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719109999}
   m_CullTransparentMesh: 1
---- !u!1 &1766904783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1766904785}
-  - component: {fileID: 1766904784}
-  m_Layer: 0
-  m_Name: CardManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1766904784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766904783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8a63e17f85ecc44f816f7bd165016f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 5129005323026642747, guid: 98d0e74eddba5dd46b94d9bd235bbf19, type: 3}
-  cardInstantiateRectPos: {fileID: 876592470}
-  cardInstantiatePos: {fileID: 1002258147}
-  defaultDropArea: {fileID: 1719110001}
-  DesObj: {fileID: 2036133778}
-  NowDamage: {fileID: 106066353}
-  TotalDamage: {fileID: 1365388443}
-  initialDeck: {fileID: 11400000, guid: 56b62cabc5725d54589a8da24fd09846, type: 2}
-  cardsInHand: []
---- !u!4 &1766904785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766904783}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1949986932}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1775505013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1831,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1766904784}
+      - m_Target: {fileID: 1084110776}
         m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
         m_MethodName: Draw
         m_Mode: 1
@@ -1944,8 +1973,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1084110774}
-  - {fileID: 1766904785}
-  - {fileID: 2142444214}
   - {fileID: 2036133779}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2043,7 +2070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -5.03, y: 0}
+  m_AnchoredPosition: {x: -5.029999, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2117264369
@@ -2084,41 +2111,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117264367}
   m_CullTransparentMesh: 1
---- !u!1 &2142444213
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2142444214}
-  m_Layer: 5
-  m_Name: GameObject (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2142444214
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142444213}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1949986932}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &8103237551436317165
 PrefabInstance:
   m_ObjectHideFlags: 0
