@@ -73,13 +73,17 @@ public class CardManager : MonoBehaviour
     {
         GameObject cardObject;
         Card card = playerDeck.Draw();
+        Sequence instSeq = DOTween.Sequence();
         if (card != null)
         {
-            cardObject = Instantiate(cardPrefab,cardInstantiatePos.position,Quaternion.Euler(0,180,0), cardInstantiatePos);
-            cardObject.transform.Translate(new Vector3(-.01f, .01f,.01f) * index);
-            cardObject.GetComponent<CardHandler>().Initialize(card);
-            cardObject.GetComponent<DropItem>().descriptionObj = DesObj;
-            cardsOnSpwan.Add(cardObject.GetComponent<CardHandler>());
+            cardObject = Instantiate(cardPrefab,cardInstantiatePos.position + new Vector3(10,0,0),Quaternion.Euler(0,180,0), cardInstantiatePos);
+            instSeq.Append(cardObject.transform.DOMove(cardInstantiatePos.position, .05f)).OnComplete(() =>
+            {
+                 cardObject.transform.Translate(new Vector3(-.01f, .01f, .01f) * index);
+                 cardObject.GetComponent<CardHandler>().Initialize(card);
+                 cardObject.GetComponent<DropItem>().descriptionObj = DesObj;
+                 cardsOnSpwan.Add(cardObject.GetComponent<CardHandler>());
+            });
         }
         else
         {
@@ -94,7 +98,7 @@ public class CardManager : MonoBehaviour
         for(int i =0; i< firstCount; i++)
         {
             InstantiateCardObject(i);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(.05f);
         }
         isEndCardSpawn = true;
     }
