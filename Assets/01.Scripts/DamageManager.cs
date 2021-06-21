@@ -28,38 +28,55 @@ public class DamageManager : MonoBehaviour
     public float totalDamage;
     public float nowDamage;
     public float hp;
+    public float maxhp;
 
     public void Start()
     {
         hp = 500;
+        maxhp = hp;
         Hptext.text = hp.ToString();
     }
 
 
-    public void SetDamage(float damage,bool isNomal)
+    public void DamagePlayer(float damage,bool isNomal)
     {
         if (isNomal)
         {
-            nowDamage = damage;
-            totalDamage += damage;
-            nowDamageText.text = "현재:" + damage;
-            totalDamageText.text = "누적:" + totalDamage;
+            Damazing(damage);
         }
         else
         {
             HitHp();
             totalDamage = 0;
-            nowDamage = damage;
-            totalDamage += damage;
-            nowDamageText.text = "현재:" + damage;
-            totalDamageText.text = "누적:" + totalDamage;
+            Damazing(damage);
         }
+    }
+
+    public void HealPlayer(float heal)
+    {
+        hp += heal;
+        if (hp > maxhp)
+            maxhp = hp;
+        DrawHpBar();
     }
 
     public void HitHp()
     {
         hp -= totalDamage;
-        Hpbar.GetComponent<Slider>().value = hp / 500;
+        DrawHpBar();
+    }
+
+    public void DrawHpBar()
+    {
+        Hpbar.GetComponent<Slider>().value = hp / maxhp;
         Hptext.text = hp.ToString();
+    }
+
+    public void Damazing(float damage)
+    {
+        nowDamage = damage;
+        totalDamage += damage;
+        nowDamageText.text = "현재:" + damage;
+        totalDamageText.text = "누적:" + totalDamage;
     }
 }

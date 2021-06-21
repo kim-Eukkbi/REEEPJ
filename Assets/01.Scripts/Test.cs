@@ -21,7 +21,7 @@ public class Test : MonoBehaviour
         playerArea.onLifted += ObjectLiftedFromPlayer;
         playerArea.onDropped += ObjectDroppedPlayer;
 
-        fieldArea.onLifted += ObjectLiftedFromfield;
+        //fieldArea.onLifted += ObjectLiftedFromfield;
         fieldArea.onDropped += ObjectDroppedfield;
     }
 
@@ -37,22 +37,22 @@ public class Test : MonoBehaviour
         gameObject.transform.SetParent(playerRectParent, true);
     }
 
-    private void ObjectLiftedFromfield(DropArea area, GameObject gameObject)
+   /* private void ObjectLiftedFromfield(DropArea area, GameObject gameObject)
     {
         gameObject.transform.SetParent(hoverRectParent, true);
-    }
+    }*/
 
     private void ObjectDroppedfield(DropArea area, GameObject gameObject)
     {
         cardManager.UsedCard(gameObject);
         gameObject.transform.SetParent(fieldRectParent, true);
         gameObject.transform.localPosition = Vector3.zero;
-        gameObject.transform.Translate(new Vector3(.03f, .03f, -0.3f) * cardManager.cardsUsed.Count);
+        gameObject.transform.Translate(new Vector3(.01f, .01f, -0.1f) * cardManager.cardsUsed.Count);
         gameObject.GetComponent<CardHandler>().UseCard();
     }
 
-    private void SetDropArea(bool active)
+    /*private void SetDropArea(bool active)
     {
         playerArea.gameObject.SetActive(active);
-    }
+    }*/
 }

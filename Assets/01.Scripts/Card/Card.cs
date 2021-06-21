@@ -8,36 +8,47 @@ public class Card : ScriptableObject
 {
     public string id;
     public string tagString;
-    public float damage;
 
-    public bool usable;
-    public bool dispoasable;
-
+    public bool isDamageCard;
+    public bool isHealCard;
 
     public CardPower power;
 
+    [HideInInspector]
+    public float damage;
+    [HideInInspector]
+    public float heal;
+
     public void Init(string _id, string _tagString,
-        CardPower defualtCP,bool dispose = false,bool usable = true)
+        CardPower defualtCP,bool _damageCard,bool _healCard)
     {
         power = defualtCP;
         this.id = _id;
         this.tagString = _tagString;
         this.damage = power.cardDamage;
-        this.dispoasable = dispose;
-        this.usable = usable;
+        this.heal = power.cardHeal;
+        this.isDamageCard = _damageCard;
+        this.isHealCard = _healCard;
     }
 
-    public Card clone(bool setDispose = false)
+    public Card clone()
     {
         var card = CreateInstance<Card>();
-        bool dispose = setDispose || this.dispoasable;
-        card.Init(id, tagString, power, dispose,usable);
+        card.Init(id, tagString, power, isDamageCard, isHealCard);
         return card;
     }
 
     public float OnUse()
     {
-        return this.damage;
+        if(isDamageCard)
+        {
+            return damage;
+        }
+        else if(isHealCard)
+        {
+            return heal;
+        }
+        return 0;
     }
 
     public void OnDraw()

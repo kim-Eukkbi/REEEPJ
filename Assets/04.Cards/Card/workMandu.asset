@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   tagString: mandu
-  usable: 0
-  dispoasable: 0
+  isDamageCard: 1
+  isHealCard: 0
   power: {fileID: 11400000, guid: ca7f39961c046b84885bcdea91e76d16, type: 2}
+  damage: 0
+  heal: 0

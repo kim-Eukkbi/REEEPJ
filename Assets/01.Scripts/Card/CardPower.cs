@@ -10,19 +10,21 @@ public class CardPower : ScriptableObject
     public string cardName;
     public string cardDescription;
     public float cardDamage;
+    public float cardHeal;
 
     public string seqOnUse;
     public string seqOnDraw;
     public string seqOnDrop;
     public string seqTurnEnd;
 
-    public void Init(Sprite _illust,string _name,string _description, float _cardDamage,string _seqOnUse,
+    public void Init(Sprite _illust,string _name,string _description, float _cardDamage,float _cardHeal,string _seqOnUse,
         string _seqOnDraw,string _seqOnDrop,string _seqTurnEnd)
     {
         this.illuset = _illust;
         this.cardName = _name;
         this.cardDescription = _description;
         this.cardDamage = _cardDamage;
+        this.cardHeal = _cardHeal;
         this.seqOnUse = _seqOnUse;
         this.seqOnDraw = _seqOnDraw;
         this.seqOnDrop = _seqOnDrop;

@@ -33,11 +33,18 @@ public class CardHandler : MonoBehaviour
 
     public void UseCard()
     {
-        if (DamageManager.Instance.nowDamage <= card.damage)
-            DamageManager.Instance.SetDamage(card.damage, true);
-        else
+        if(card.isDamageCard)
         {
-            DamageManager.Instance.SetDamage(card.damage, false);
+            if (DamageManager.Instance.nowDamage <= card.damage)
+                DamageManager.Instance.DamagePlayer(card.damage, true);
+            else
+            {
+                DamageManager.Instance.DamagePlayer(card.damage, false);
+            }
+        }
+        else if(card.isHealCard)
+        {
+            DamageManager.Instance.HealPlayer(card.heal);
         }
     }
 }
