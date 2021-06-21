@@ -15,10 +15,19 @@ public class CardHandler : MonoBehaviour
     public GameObject NowDamage;
     public GameObject totalDamage;
 
+    private Image thisCard;
 
-    public void Start()
+    private void Start()
     {
+        thisCard = gameObject.GetComponent<Image>();
+    }
 
+    private void Update()
+    {
+        if (Test.isMyturn)
+            thisCard.raycastTarget = true;
+        else
+            thisCard.raycastTarget = false;
     }
 
     public void Initialize(Card drawCard)
@@ -27,7 +36,10 @@ public class CardHandler : MonoBehaviour
         card = drawCard;
         illuset.sprite = card.power.illuset;
         cardName.text = card.power.cardName;
-        cardDamage.text = "Power :" + card.power.cardDamage.ToString();
+        if(card.isDamageCard)
+            cardDamage.text = "Power :" + card.damage.ToString();
+        else if(card.isHealCard)
+            cardDamage.text = "Heal :" + card.heal.ToString();
         cardDescription = card.power.cardDescription;
     }
 

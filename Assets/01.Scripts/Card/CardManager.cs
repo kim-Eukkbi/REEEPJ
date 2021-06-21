@@ -34,22 +34,25 @@ public class CardManager : MonoBehaviour
 
     public void Draw()
     {
-        if (isEndCardSpawn)
+        if (Test.isMyturn)
         {
-            if(cardsInHand.Count < 9)
+            if (isEndCardSpawn)
             {
-                GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
-                DrawSeq(drawCard);
-                firstCount--;
+                if (cardsInHand.Count < 9)
+                {
+                    GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
+                    DrawSeq(drawCard);
+                    firstCount--;
+                }
+                else
+                {
+                    Debug.LogWarning("소지할 수 있는 카드의 양을 넘었습니다");
+                }
             }
             else
             {
-                Debug.LogWarning("소지할 수 있는 카드의 양을 넘었습니다");
+                Debug.LogWarning("카드 스폰이 아직 완료되지 않았습니다");
             }
-        }
-        else
-        {
-            Debug.LogWarning("카드 스폰이 아직 완료되지 않았습니다");
         }
     }
 

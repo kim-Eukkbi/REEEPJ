@@ -58,11 +58,6 @@ public class DropItem : MonoBehaviour , IPointerDownHandler , IPointerUpHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (droppedArea.gameObject.name.Equals("Filed's DropArea"))
-        {
-            return;
-        }
-
         if (onMoveStart != null)
         {
             onMoveStart(this);

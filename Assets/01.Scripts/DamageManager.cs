@@ -22,19 +22,34 @@ public class DamageManager : MonoBehaviour
 
     public Text nowDamageText;
     public Text totalDamageText;
-    public Text Hptext;
+    public Text hptext;
+    public Text time;
     public GameObject Hpbar;
+    public GameObject gameOverObj;
 
     public float totalDamage;
     public float nowDamage;
     public float hp;
     public float maxhp;
+    public float remainTime;
 
     public void Start()
     {
+        remainTime = 50;
         hp = 500;
         maxhp = hp;
-        Hptext.text = hp.ToString();
+        hptext.text = hp.ToString();
+    }
+
+    public void Update()
+    {
+        remainTime -= Time.deltaTime;
+        time.text = string.Format("Time : {0:0.00}",remainTime);
+        if(remainTime <= 0)
+        {
+            remainTime = 50;
+            Test.isMyturn = !Test.isMyturn;
+        }
     }
 
 
@@ -64,12 +79,16 @@ public class DamageManager : MonoBehaviour
     {
         hp -= totalDamage;
         DrawHpBar();
+        if(hp <0)
+        {
+            GameOver();
+        }
     }
 
     public void DrawHpBar()
     {
         Hpbar.GetComponent<Slider>().value = hp / maxhp;
-        Hptext.text = hp.ToString();
+        hptext.text = hp.ToString();
     }
 
     public void Damazing(float damage)
@@ -78,5 +97,10 @@ public class DamageManager : MonoBehaviour
         totalDamage += damage;
         nowDamageText.text = "현재:" + damage;
         totalDamageText.text = "누적:" + totalDamage;
+    }
+
+    public void GameOver()
+    {
+        gameOverObj.SetActive(true);
     }
 }

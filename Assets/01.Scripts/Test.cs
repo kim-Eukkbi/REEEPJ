@@ -12,6 +12,9 @@ public class Test : MonoBehaviour
     public RectTransform fieldRectParent;
     public RectTransform hoverRectParent;
 
+    [SerializeField]
+    public static bool isMyturn = true;
+
 
     public CardManager cardManager;
 
@@ -21,7 +24,7 @@ public class Test : MonoBehaviour
         playerArea.onLifted += ObjectLiftedFromPlayer;
         playerArea.onDropped += ObjectDroppedPlayer;
 
-        //fieldArea.onLifted += ObjectLiftedFromfield;
+        fieldArea.onLifted += ObjectLiftedFromfield;
         fieldArea.onDropped += ObjectDroppedfield;
     }
 
@@ -37,22 +40,28 @@ public class Test : MonoBehaviour
         gameObject.transform.SetParent(playerRectParent, true);
     }
 
-   /* private void ObjectLiftedFromfield(DropArea area, GameObject gameObject)
+    private void ObjectLiftedFromfield(DropArea area, GameObject gameObject)
     {
         gameObject.transform.SetParent(hoverRectParent, true);
-    }*/
+    }
 
     private void ObjectDroppedfield(DropArea area, GameObject gameObject)
     {
-        cardManager.UsedCard(gameObject);
-        gameObject.transform.SetParent(fieldRectParent, true);
-        gameObject.transform.localPosition = Vector3.zero;
-        gameObject.transform.Translate(new Vector3(.01f, .01f, -0.1f) * cardManager.cardsUsed.Count);
-        gameObject.GetComponent<CardHandler>().UseCard();
+        if(isMyturn)
+        {
+            cardManager.UsedCard(gameObject);
+            gameObject.transform.SetParent(fieldRectParent, true);
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.Translate(new Vector3(.01f, .01f, -0.1f) * cardManager.cardsUsed.Count);
+            gameObject.GetComponent<CardHandler>().UseCard();
+            gameObject.GetComponent<Image>().raycastTarget = false;
+        }
+        isMyturn = !isMyturn;
     }
 
     /*private void SetDropArea(bool active)
     {
         playerArea.gameObject.SetActive(active);
     }*/
+
 }

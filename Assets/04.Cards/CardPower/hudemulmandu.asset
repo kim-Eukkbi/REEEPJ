@@ -15,7 +15,8 @@ MonoBehaviour:
   illuset: {fileID: 21300000, guid: 78f4c4a24c1d81549ac983a89899bf87, type: 3}
   cardName: "\uD6C4\uB4DC\uB9CC\uB450"
   cardDescription: "\uC720\uB2C8\uD2F0Lab\uB3D9\uC544\uB9AC\uC758 \uBC30\uB108 \uC0AC\uC9C4\uC774\uB2E4"
-  cardDamage: 10
+  cardDamage: 300
+  cardHeal: 0
   seqOnUse: "\uC790\uAD6C \uACFC\uC81C\uB97C \uB0B4\uC900\uB2E4"
   seqOnDraw: 
   seqOnDrop: 
