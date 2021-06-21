@@ -57,6 +57,7 @@ public class Test : MonoBehaviour
             gameObject.GetComponent<Image>().raycastTarget = false;
         }
         isMyturn = !isMyturn;
+        DamageManager.Instance.remainTime = 50;
     }
 
     /*private void SetDropArea(bool active)
