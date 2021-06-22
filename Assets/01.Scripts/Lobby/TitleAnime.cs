@@ -12,26 +12,34 @@ public class TitleAnime : MonoBehaviour
     public GameObject flash;
     public GameObject clickToStart;
     public GameObject infoText;
-    public GameObject joinButten;
+    public GameObject joinButton;
+    public GameObject ClickPanel;
+    public LobbyManager LobbyManager;
 
     private Sequence mainSeq;
     private Vector3 logoPos;
     private Vector3 cardGamePos;
     private Vector3 infoTextPos;
-    private Vector3 joinButtenPos;
+    private Vector3 joinButtonPos;
+
+    private void Awake()
+    {
+        LobbyManager.enabled = false;
+    }
 
     private void Start()
     {
+        ClickPanel.SetActive(false);
         Image _flash = flash.GetComponent<Image>();
         logoPos = logo.transform.position;
         cardGamePos = cardGameText.transform.position;
         infoTextPos = infoText.transform.position;
-        joinButtenPos = joinButten.transform.position;
+        joinButtonPos = joinButton.transform.position;
 
         logo.transform.position -= new Vector3(0, 100, 0);
         cardGameText.transform.position -= new Vector3(0, 100, 0);
         infoText.transform.position -= new Vector3(0, 100, 0);
-        joinButten.transform.position -= new Vector3(0, 100, 0);
+        joinButton.transform.position -= new Vector3(0, 100, 0);
 
         mainSeq = DOTween.Sequence();
         mainSeq.Append(logo.transform.DOMove(logoPos, 1.5f).SetEase(Ease.OutQuart));
@@ -41,6 +49,7 @@ public class TitleAnime : MonoBehaviour
         {
             bgCloud.AddComponent<clouldMove>();
             clickToStart.AddComponent<ClickToStart>();
+            ClickPanel.SetActive(true);
         });
     }
 
@@ -61,7 +70,11 @@ public class TitleAnime : MonoBehaviour
             cardGameText.SetActive(false);
         });
         clickSeq.Insert(.5f,infoText.transform.DOMove(infoTextPos, 1.5f).SetEase(Ease.OutQuart));
-        clickSeq.Join(joinButten.transform.DOMove(joinButtenPos, 1.5f).SetEase(Ease.OutQuart));
+        clickSeq.Join(joinButton.transform.DOMove(joinButtonPos, 1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
+        {
+            LobbyManager.enabled = true;
+            ClickPanel.SetActive(false);
+        });
     }
 
 }
