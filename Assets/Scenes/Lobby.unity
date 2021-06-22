@@ -404,7 +404,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Re:Create
+  m_Text: Card:Game
 --- !u!222 &552034851
 CanvasRenderer:
   m_ObjectHideFlags: 0
