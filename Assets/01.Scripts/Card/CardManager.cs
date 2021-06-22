@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Photon.Pun;
 
-public class CardManager : MonoBehaviour
+public class CardManager : MonoBehaviourPun
 {
+    public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
 
     public GameObject cardPrefab;
     public Transform cardInstantiateRectPos;
@@ -34,6 +36,8 @@ public class CardManager : MonoBehaviour
 
     public void Draw()
     {
+        if (!IsMasterClientLocal || PhotonNetwork.PlayerList.Length < 2)
+            return;
         if (Test.isMyturn)
         {
             if (isEndCardSpawn)
@@ -98,7 +102,7 @@ public class CardManager : MonoBehaviour
 
     private IEnumerator InstantiateCo()
     {
-        for(int i =0; i< firstCount; i++)
+        for (int i =0; i< firstCount; i++)
         {
             InstantiateCardObject(i);
             yield return new WaitForSeconds(.05f);

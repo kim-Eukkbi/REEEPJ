@@ -24,7 +24,7 @@ public class TitleAnime : MonoBehaviour
 
     private void Awake()
     {
-        LobbyManager.enabled = false;
+        LobbyManager.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -72,7 +72,7 @@ public class TitleAnime : MonoBehaviour
         clickSeq.Insert(.5f,infoText.transform.DOMove(infoTextPos, 1.5f).SetEase(Ease.OutQuart));
         clickSeq.Join(joinButton.transform.DOMove(joinButtonPos, 1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
         {
-            LobbyManager.enabled = true;
+            LobbyManager.gameObject.SetActive(true);
             ClickPanel.SetActive(false);
         });
     }

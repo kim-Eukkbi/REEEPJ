@@ -1,10 +1,13 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class CardHandler : MonoBehaviour
+public class CardHandler : MonoBehaviourPun
 {
+    public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
+
     public Card card;
    
     public GameObject DecObj;
@@ -23,7 +26,7 @@ public class CardHandler : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
         if (Test.isMyturn)
             thisCard.raycastTarget = true;
         else
@@ -45,7 +48,7 @@ public class CardHandler : MonoBehaviour
 
     public void UseCard()
     {
-        if(card.isDamageCard)
+        if (card.isDamageCard)
         {
             if (DamageManager.Instance.nowDamage <= card.damage)
                 DamageManager.Instance.DamagePlayer(card.damage, true);
