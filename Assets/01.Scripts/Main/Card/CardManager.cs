@@ -7,8 +7,12 @@ using Photon.Pun;
 
 public class CardManager : MonoBehaviourPun
 {
-    public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
-
+    public enum ServerState
+    {
+        Master,
+        Other
+    };
+    public ServerState serverState;
     public GameObject cardPrefab;
     public Transform cardInstantiateRectPos;
     public Transform cardInstantiatePos;
@@ -27,17 +31,24 @@ public class CardManager : MonoBehaviourPun
     private int firstCount =0;
     private bool isEndCardSpawn = false;
 
+
     public void Start()
     {
-        playerDeck = initialDeck.Clone();
-        firstCount = playerDeck.deck.Count;
-        StartCoroutine(InstantiateCo());
+        if (PhotonNetwork.IsMasterClient)
+            serverState = ServerState.Master;
+        else
+            serverState = ServerState.Other;
+
+        if (serverState.Equals(ServerState.Master))
+        {
+            playerDeck = initialDeck.Clone();
+            firstCount = playerDeck.deck.Count;
+            StartCoroutine(InstantiateCo());
+        }
     }
 
     public void Draw()
     {
-        if (!IsMasterClientLocal || PhotonNetwork.PlayerList.Length < 2)
-            return;
         if (Test.isMyturn)
         {
             if (isEndCardSpawn)
@@ -83,7 +94,9 @@ public class CardManager : MonoBehaviourPun
         Sequence instSeq = DOTween.Sequence();
         if (card != null)
         {
-            cardObject = Instantiate(cardPrefab,cardInstantiatePos.position + new Vector3(10,0,0),Quaternion.Euler(0,180,0), cardInstantiatePos);
+            cardObject = PhotonNetwork.Instantiate(cardPrefab.name,
+                cardInstantiatePos.position + new Vector3(10, 0, 0), Quaternion.Euler(0, 180, 0));
+            cardObject.transform.SetParent(cardInstantiatePos);
             instSeq.Append(cardObject.transform.DOMove(cardInstantiatePos.position, .05f)).OnComplete(() =>
             {
                  cardObject.transform.Translate(new Vector3(-.01f, .01f, .01f) * index);

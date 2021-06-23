@@ -31,6 +31,8 @@ public class TitleAnime : MonoBehaviour
     {
         ClickPanel.SetActive(false);
         Image _flash = flash.GetComponent<Image>();
+
+
         logoPos = logo.transform.position;
         cardGamePos = cardGameText.transform.position;
         infoTextPos = infoText.transform.position;
@@ -69,11 +71,14 @@ public class TitleAnime : MonoBehaviour
             bgCloud.SetActive(false);
             cardGameText.SetActive(false);
         });
+
         clickSeq.Insert(.5f,infoText.transform.DOMove(infoTextPos, 1.5f).SetEase(Ease.OutQuart));
         clickSeq.Join(joinButton.transform.DOMove(joinButtonPos, 1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
         {
             LobbyManager.gameObject.SetActive(true);
             ClickPanel.SetActive(false);
+            clickSeq.Kill();
+            mainSeq.Kill();
         });
     }
 
