@@ -37,6 +37,7 @@ public class Test : MonoBehaviour
 
     private void ObjectDroppedPlayer(DropArea area, GameObject gameObject)
     {
+        cardManager.OrderCard();
         gameObject.transform.SetParent(playerRectParent, true);
     }
 
@@ -49,15 +50,27 @@ public class Test : MonoBehaviour
     {
         if(isMyturn)
         {
+            int index;
             cardManager.UsedCard(gameObject);
             gameObject.transform.SetParent(fieldRectParent, true);
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.Translate(new Vector3(.01f, .01f, -0.1f) * cardManager.cardsUsed.Count);
             gameObject.GetComponent<CardHandler>().UseCard();
             gameObject.GetComponent<Image>().raycastTarget = false;
+            index = cardManager.CheckCard(gameObject);
+            GameObject obj = cardManager.ponCardList[index];
+            cardManager.ponCardList.RemoveAt(index);
+            Destroy(obj);
+            StartCoroutine(OrderCardCo());
         }
         isMyturn = !isMyturn;
         DamageManager.Instance.remainTime = 50;
+    }
+
+    private IEnumerator OrderCardCo()
+    {
+        yield return null;
+        cardManager.OrderCard();
     }
 
     /*private void SetDropArea(bool active)

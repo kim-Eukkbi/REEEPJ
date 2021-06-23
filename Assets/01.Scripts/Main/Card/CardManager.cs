@@ -8,6 +8,7 @@ using Photon.Pun;
 public class CardManager : MonoBehaviourPun
 {
     public GameObject cardPrefab;
+    public GameObject ponCardprefab;
     public Transform cardInstantiateRectPos;
     public Transform cardInstantiatePos;
     public DropArea defaultDropArea;
@@ -21,6 +22,8 @@ public class CardManager : MonoBehaviourPun
     public List<CardHandler> cardsOnSpwan;
     public List<CardHandler> cardsInHand;
     public List<CardHandler> cardsUsed;
+
+    public List<GameObject> ponCardList = new List<GameObject>();
 
     private int firstCount =0;
     private bool isEndCardSpawn = false;
@@ -42,6 +45,7 @@ public class CardManager : MonoBehaviourPun
                 if (cardsInHand.Count < 9)
                 {
                     GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
+                    ponCardList.Add(Instantiate(ponCardprefab, cardInstantiatePos.position, Quaternion.identity, cardInstantiateRectPos));
                     DrawSeq(drawCard);
                     firstCount--;
                 }
@@ -57,6 +61,25 @@ public class CardManager : MonoBehaviourPun
         }
     }
 
+    public void OrderCard()
+    {
+        for(int i =0;i<ponCardList.Count;i++)
+        {
+            cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, 1f);
+        }
+    }
+
+    public int CheckCard(GameObject gameObject)
+    {
+        for(int i =0;i<cardsInHand.Count;i++)
+        {
+            if (gameObject.Equals(cardsInHand[i]))
+                return i;
+        }
+        return 0;
+    }
+
+
     private void DrawSeq(GameObject drawCard)
     {
         Sequence drawSeq = DOTween.Sequence();
@@ -65,12 +88,11 @@ public class CardManager : MonoBehaviourPun
         cardsOnSpwan.Remove(drawCardHandler);
         cardsInHand.Add(drawCardHandler);
         drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 3, drawCardPos.y, drawCardPos.z - 2), .5f));
-        drawSeq.Insert(.1f,drawCard.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f));
-        drawSeq.Append(drawCard.transform.DOMove(cardInstantiateRectPos.position, .1f)).OnComplete(()=>
+        drawSeq.Insert(.1f, drawCard.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f)).OnComplete(() => 
         {
-            drawCard.transform.SetParent(cardInstantiateRectPos);
             drawCard.GetComponent<DropItem>().droppedArea = defaultDropArea;
-        });
+            OrderCard();
+        }); 
     }
 
     private void InstantiateCardObject(int index)
