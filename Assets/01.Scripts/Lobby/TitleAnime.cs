@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class TitleAnime : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class TitleAnime : MonoBehaviour
     public GameObject infoText;
     public GameObject joinButton;
     public GameObject ClickPanel;
+    public GameObject OnlineButton;
+    public GameObject OfflineButton;
     public LobbyManager LobbyManager;
 
     private Sequence mainSeq;
@@ -21,6 +24,8 @@ public class TitleAnime : MonoBehaviour
     private Vector3 cardGamePos;
     private Vector3 infoTextPos;
     private Vector3 joinButtonPos;
+    private Vector3 onlineButtonPos;
+    private Vector3 offlineButtonPos;
 
     private void Awake()
     {
@@ -37,11 +42,15 @@ public class TitleAnime : MonoBehaviour
         cardGamePos = cardGameText.transform.position;
         infoTextPos = infoText.transform.position;
         joinButtonPos = joinButton.transform.position;
+        onlineButtonPos = OnlineButton.transform.position;
+        offlineButtonPos = OfflineButton.transform.position;
 
         logo.transform.position -= new Vector3(0, 100, 0);
         cardGameText.transform.position -= new Vector3(0, 100, 0);
         infoText.transform.position -= new Vector3(0, 100, 0);
         joinButton.transform.position -= new Vector3(0, 100, 0);
+        OnlineButton.transform.position -= new Vector3(0, 100, 0);
+        OfflineButton.transform.position -= new Vector3(0, 100, 0);
 
         mainSeq = DOTween.Sequence();
         mainSeq.Append(logo.transform.DOMove(logoPos, 1.5f).SetEase(Ease.OutQuart));
@@ -57,7 +66,6 @@ public class TitleAnime : MonoBehaviour
 
     public void ClickScr()
     {
-        Debug.Log("ÀÀ¾Ö");
         clickToStart.SetActive(false);
         Sequence clickSeq = DOTween.Sequence();
         clickSeq.Append(logo.transform.DOMove(new Vector3(logo.transform.position.x,
@@ -72,14 +80,37 @@ public class TitleAnime : MonoBehaviour
             cardGameText.SetActive(false);
         });
 
-        clickSeq.Insert(.5f,infoText.transform.DOMove(infoTextPos, 1.5f).SetEase(Ease.OutQuart));
-        clickSeq.Join(joinButton.transform.DOMove(joinButtonPos, 1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
+        clickSeq.Insert(.5f, OfflineButton.transform.DOMove(offlineButtonPos, 1.5f).SetEase(Ease.OutQuart));
+        clickSeq.Join(OnlineButton.transform.DOMove(onlineButtonPos, 1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
         {
-            LobbyManager.gameObject.SetActive(true);
             ClickPanel.SetActive(false);
             clickSeq.Kill();
             mainSeq.Kill();
         });
     }
 
+    public void OnlineClick()
+    {
+        Sequence OnlineSeq = DOTween.Sequence();
+        OnlineSeq.Append(OnlineButton.transform.DOMove(new Vector3(OnlineButton.transform.position.x,
+           OnlineButton.transform.position.y + 50, 0), 5f).SetEase(Ease.OutQuart));
+        OnlineSeq.Join(OfflineButton.transform.DOMove(new Vector3(OfflineButton.transform.position.x,
+            OfflineButton.transform.position.y + 50, 0), 5f).SetEase(Ease.OutQuart)).OnComplete(() =>
+            {
+                OnlineButton.SetActive(false);
+                OfflineButton.SetActive(false);
+            });
+
+        OnlineSeq.Insert(.5f, infoText.transform.DOMove(infoTextPos, 1.5f).SetEase(Ease.OutQuart));
+        OnlineSeq.Join(joinButton.transform.DOMove(joinButtonPos,1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
+        {
+            LobbyManager.gameObject.SetActive(true);
+            OnlineSeq.Kill();
+        });
+    }
+
+    public void OfflineClick()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }

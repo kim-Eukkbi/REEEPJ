@@ -1,11 +1,11 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
 public class ServerManager : MonoBehaviourPun
 {
-    public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
+    //public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
     public bool iIsActivetrue = false;
     public GameObject GameManager;
     public GameObject UICanvas;
@@ -20,10 +20,6 @@ public class ServerManager : MonoBehaviourPun
     {
         if(!iIsActivetrue)
         {
-            if (!IsMasterClientLocal || PhotonNetwork.PlayerList.Length < 2)
-            {
-                return;
-            }
             else
             {
                 GameManager.SetActive(true);
@@ -34,3 +30,4 @@ public class ServerManager : MonoBehaviourPun
       
     }
 }
+*/

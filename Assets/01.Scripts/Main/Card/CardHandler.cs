@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class CardHandler : MonoBehaviourPun
 {
-    public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
+    //public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
 
     public Card card;
    

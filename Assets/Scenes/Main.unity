@@ -1049,6 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a63e17f85ecc44f816f7bd165016f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serverState: 1
   cardPrefab: {fileID: 5129005323026642747, guid: 98d0e74eddba5dd46b94d9bd235bbf19, type: 3}
   cardInstantiateRectPos: {fileID: 876592470}
   cardInstantiatePos: {fileID: 1002258147}
@@ -1563,6 +1564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5f26af1ec80664e8f9efda65ef92ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pvCache: {fileID: 0}
   iIsActivetrue: 0
   GameManager: {fileID: 1084110773}
   UICanvas: {fileID: 157342919}
