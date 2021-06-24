@@ -30,24 +30,31 @@ public class EnemyManager : MonoBehaviour
                 cardManager.Draw();
             }
 
-            for(int i =0; i < cardManager.cardsInEnemyHand.Count;i++)
+            StartCoroutine(Thinking());
+        }
+    }
+
+
+    public IEnumerator Thinking()
+    {
+        yield return new WaitForSeconds(5f);
+        for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
+        {
+            if (cardManager.cardsInEnemyHand[i].card.damage > DamageManager.Instance.nowDamage)
             {
-                if(cardManager.cardsInEnemyHand[i].card.damage > DamageManager.Instance.nowDamage)
-                {
-                    cardManager.UsedCard(cardManager.cardsInEnemyHand[i].gameObject);
-                    DamageManager.Instance.ResetTurn();
-                }
-                else if(cardManager.cardsInEnemyHand[i].card.heal > DamageManager.Instance.nowDamage)
-                {
-                    cardManager.UsedCard(cardManager.cardsInEnemyHand[i].gameObject);
-                    DamageManager.Instance.ResetTurn();
-                }
-                else
-                {
-                    cardManager.UsedCard(cardManager.cardsInEnemyHand
-                        .OrderByDescending(x => x.card.damage).First().gameObject);
-                    DamageManager.Instance.ResetTurn();
-                }
+                cardManager.UsedCard(cardManager.cardsInEnemyHand[i].gameObject);
+                DamageManager.Instance.ResetTurn();
+            }
+            else if (cardManager.cardsInEnemyHand[i].card.heal > DamageManager.Instance.nowDamage)
+            {
+                cardManager.UsedCard(cardManager.cardsInEnemyHand[i].gameObject);
+                DamageManager.Instance.ResetTurn();
+            }
+            else
+            {
+                cardManager.UsedCard(cardManager.cardsInEnemyHand
+                    .OrderByDescending(x => x.card.damage).First().gameObject);
+                DamageManager.Instance.ResetTurn();
             }
         }
     }
