@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56b9ba34aa10294e9b46278794cbecc, type: 3}
+  m_Name: Auaep
+  m_EditorClassIdentifier: 
+  illuset: {fileID: 21300000, guid: 115af2bb09beac648a66bfc05be8da53, type: 3}
+  cardName: "VR\uC6B0\uC571"
+  cardDescription: "\uBE57\uD2B8\uC138\uC774\uBC84 \uC7BC\uC788\uB2E4\uC544"
+  cardDamage: 30
+  cardHeal: 0
+  seqOnUse: 
+  seqOnDraw: 
+  seqOnDrop: 
+  seqTurnEnd: 

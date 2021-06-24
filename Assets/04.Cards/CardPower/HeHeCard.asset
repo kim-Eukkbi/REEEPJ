@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56b9ba34aa10294e9b46278794cbecc, type: 3}
+  m_Name: HeHeCard
+  m_EditorClassIdentifier: 
+  illuset: {fileID: 21300000, guid: 9370757e5061cea4da6d8d8abad31dc8, type: 3}
+  cardName: "\uD79B\uC9C4\uCE74\uB4DC"
+  cardDescription: "\uB0B4\uB824\uAC04 \uBC14\uC9C0 \uD788\uD788 \uBB34\uC9C0\uAC1C
+    \uBC14\uC9C0!"
+  cardDamage: 50
+  cardHeal: 0
+  seqOnUse: 
+  seqOnDraw: 
+  seqOnDrop: 
+  seqTurnEnd: 
