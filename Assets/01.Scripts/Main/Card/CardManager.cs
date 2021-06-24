@@ -59,12 +59,13 @@ public class CardManager : MonoBehaviourPun
         {
             if (cardsOnSpwan.Count < 2)
             {
+                ReyCastReset(false);
                 StartCoroutine(SuffleDeck(cardsUsed.Count));
             }
 
             if (Test.isMyturn)
             {
-                ReyCastReset(true);
+                ReyCastReset(false);
                 if (cardsInHand.Count < 9)
                 {
                     GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
@@ -79,6 +80,7 @@ public class CardManager : MonoBehaviourPun
             }
             else
             {
+                ReyCastReset(false);
                 if (cardsInEnemyHand.Count < 9)
                 {
                     GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
@@ -108,6 +110,7 @@ public class CardManager : MonoBehaviourPun
         }
         else
         {
+            ReyCastReset(false);
             for (int i = 0; i < enemyPonCardList.Count; i++)
             {
                 cardsInEnemyHand[i].transform.DOMove(enemyPonCardList[i].transform.position, .5f);
@@ -145,6 +148,7 @@ public class CardManager : MonoBehaviourPun
         cardsOnSpwan.Remove(drawCardHandler);
         if (isPlayerTurn)
         {
+            ReyCastReset(false);
             cardsInHand.Add(drawCardHandler);
             drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 3, drawCardPos.y, drawCardPos.z - 2), .5f));
             drawSeq.Insert(.1f, drawCard.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f)).OnComplete(() =>
@@ -156,6 +160,7 @@ public class CardManager : MonoBehaviourPun
         }
         else
         {
+            ReyCastReset(false);
             cardsInEnemyHand.Add(drawCardHandler);
             drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 5, drawCardPos.y, drawCardPos.z - 2), .5f));
             drawSeq.Insert(.1f, drawCard.transform.DOScale(.5f, .5f)).OnComplete(() =>

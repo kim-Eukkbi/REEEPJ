@@ -15,6 +15,9 @@ public class CardHandler : MonoBehaviourPun
     public string cardDescription;
     public GameObject NowDamage;
     public GameObject totalDamage;
+    public GameObject frontCard;
+    public Material redMat;
+    public Material GreenMat;
 
     private Image thisCard;
 
@@ -35,6 +38,10 @@ public class CardHandler : MonoBehaviourPun
         else if(card.isHealCard)
             cardDamage.text = "Heal :" + card.heal.ToString();
         cardDescription = card.power.cardDescription;
+        if (card.isDamageCard)
+            frontCard.GetComponent<MeshRenderer>().material = redMat;
+        if (card.isHealCard)
+            frontCard.GetComponent<MeshRenderer>().material = GreenMat;
     }
 
     public void UseCard()
