@@ -26,20 +26,22 @@ public class EnemyManager : MonoBehaviour
             {
                 StartCoroutine(cardManager.FirstDraw());
                 isfirstTrun = false;
+                StartCoroutine(Thinking(5));
             }
             else
             {
                 cardManager.Draw();
+                StartCoroutine(Thinking(3));
             }
 
-            StartCoroutine(Thinking());
+            
         }
     }
 
 
-    public IEnumerator Thinking()
+    public IEnumerator Thinking(float n)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(n);
         GameObject gameObject;
         for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
         {
