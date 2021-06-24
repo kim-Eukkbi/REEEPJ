@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56b9ba34aa10294e9b46278794cbecc, type: 3}
+  m_Name: Bak
+  m_EditorClassIdentifier: 
+  illuset: {fileID: 21300000, guid: 1bf37dd11f42fa9409220280dc7b519e, type: 3}
+  cardName: "\uC6B0\uC5FD\uC77C\uAE4C\uC694?"
+  cardDescription: "\uC774 \uC544\uC774\uAC00 \"\uAC08\uAD7C\uC744 \uB2F9\uD558\uC9C0
+    \uC54A\uB294 \uB0A0\" \uC774\uB77C\uB294\uAC78 \uC54C\uAE4C\uC694."
+  cardDamage: 1
+  cardHeal: 0
+  seqOnUse: 
+  seqOnDraw: 
+  seqOnDrop: 
+  seqTurnEnd: 
