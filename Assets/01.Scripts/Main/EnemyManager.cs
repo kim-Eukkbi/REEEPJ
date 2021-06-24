@@ -8,6 +8,7 @@ using System.Linq;
 public class EnemyManager : MonoBehaviour
 {
     public CardManager cardManager;
+    public GameObject fieldPos;
 
     bool isfirstTrun = true;
 
@@ -27,6 +28,11 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
+               if(cardManager.cardsOnSpwan.Count < 2)
+               {
+
+               }
+               else
                 cardManager.Draw();
             }
 
@@ -38,24 +44,54 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator Thinking()
     {
         yield return new WaitForSeconds(5f);
+        GameObject gameObject;
         for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
         {
             if (cardManager.cardsInEnemyHand[i].card.damage > DamageManager.Instance.nowDamage)
             {
-                cardManager.UsedCard(cardManager.cardsInEnemyHand[i].gameObject);
-                DamageManager.Instance.ResetTurn();
+                gameObject =  cardManager.cardsInEnemyHand[i].gameObject;
+                AIUseCard(gameObject);
+                yield break;
             }
             else if (cardManager.cardsInEnemyHand[i].card.heal > DamageManager.Instance.nowDamage)
             {
-                cardManager.UsedCard(cardManager.cardsInEnemyHand[i].gameObject);
-                DamageManager.Instance.ResetTurn();
-            }
-            else
-            {
-                cardManager.UsedCard(cardManager.cardsInEnemyHand
-                    .OrderByDescending(x => x.card.damage).First().gameObject);
-                DamageManager.Instance.ResetTurn();
+                gameObject = cardManager.cardsInEnemyHand[i].gameObject;
+                AIUseCard(gameObject);
+                yield break;
             }
         }
+        gameObject = cardManager.cardsInEnemyHand
+        .OrderByDescending(x => x.card.damage).First().gameObject;
+        AIUseCard(gameObject);
+    }
+
+    public void AIUseCard(GameObject gameObject)
+    {
+        Sequence UseSeq = DOTween.Sequence();
+        UseSeq.Append(gameObject.transform.DOMove(this.transform.position, .5f));
+        UseSeq.Insert(.1f, gameObject.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f));
+        UseSeq.Join(gameObject.transform.DOScale(1, .5f));
+        UseSeq.Append(gameObject.transform.DOMove(fieldPos.transform.position, .5f)).OnComplete(() =>
+        {
+            cardManager.UsedCard(gameObject);
+            gameObject.transform.SetParent(fieldPos.transform, true);
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.Translate(new Vector3(.01f, .01f, -0.1f) * cardManager.cardsUsed.Count);
+            gameObject.GetComponent<CardHandler>().UseCard();
+            gameObject.GetComponent<Image>().raycastTarget = false;
+            int index = cardManager.CheckCard(gameObject);
+            GameObject obj = cardManager.enemyPonCardList[index];
+            cardManager.enemyPonCardList.RemoveAt(index);
+            Destroy(obj);
+            StartCoroutine(OrderCo());
+            DamageManager.Instance.ResetTurn();
+        });
+
+    }
+
+    public IEnumerator OrderCo()
+    {
+        yield return null;
+        cardManager.OrderCard(false);
     }
 }

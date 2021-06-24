@@ -63,9 +63,7 @@ public class Test : MonoBehaviour
             Destroy(obj);
             StartCoroutine(OrderCardCo());
         }
-        isMyturn = !isMyturn;
-        DamageManager.Instance.remainTime = 30;
-        DamageManager.Instance.OnNextTrun.Invoke();
+        DamageManager.Instance.ResetTurn();
     }
 
     private IEnumerator OrderCardCo()

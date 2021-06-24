@@ -108,10 +108,21 @@ public class CardManager : MonoBehaviourPun
 
     public int CheckCard(GameObject gameObject)
     {
-        for (int i = 0; i < cardsInHand.Count; i++)
+        if(Test.isMyturn)
         {
-            if (gameObject.Equals(cardsInHand[i]))
-                return i;
+            for (int i = 0; i < cardsInHand.Count; i++)
+            {
+                if (gameObject.Equals(cardsInHand[i]))
+                    return i;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < cardsInEnemyHand.Count; i++)
+            {
+                if (gameObject.Equals(cardsInEnemyHand[i]))
+                    return i;
+            }
         }
         return 0;
     }
@@ -185,10 +196,12 @@ public class CardManager : MonoBehaviourPun
     public void UsedCard(GameObject UsedCard)
     {
         CardHandler usedCardHandler = UsedCard.GetComponent<CardHandler>();
+
         if (Test.isMyturn)
             cardsInHand.Remove(usedCardHandler);
         else
             cardsInEnemyHand.Remove(usedCardHandler);
+
         cardsUsed.Add(usedCardHandler);
     }
 

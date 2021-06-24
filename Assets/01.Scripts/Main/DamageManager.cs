@@ -42,8 +42,8 @@ public class DamageManager : MonoBehaviour
     public void Start()
     {
         remainTime = 30;
-        hp = 500;
-        enemyHp = 500;
+        hp = 250;
+        enemyHp = 250;
         maxhp = hp;
         enemyMaxhp = enemyHp;
         enemyHptext.text = enemyHp.ToString();

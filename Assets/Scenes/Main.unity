@@ -191,7 +191,9 @@ MonoBehaviour:
   totalDamage: 0
   nowDamage: 0
   hp: 0
+  enemyHp: 0
   maxhp: 0
+  enemyMaxhp: 0
   remainTime: 0
 --- !u!225 &43073292
 CanvasGroup:
@@ -2872,7 +2874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 135}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1909854074
@@ -2888,6 +2890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardManager: {fileID: 1084110776}
+  fieldPos: {fileID: 1687082776}
 --- !u!1 &1949986928
 GameObject:
   m_ObjectHideFlags: 0
