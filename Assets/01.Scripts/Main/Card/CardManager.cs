@@ -57,6 +57,11 @@ public class CardManager : MonoBehaviourPun
     {
         if (isEndCardSpawn)
         {
+            if (cardsOnSpwan.Count < 2)
+            {
+                StartCoroutine(SuffleDeck(cardsUsed.Count));
+            }
+
             if (Test.isMyturn)
             {
                 ReyCastReset(true);
@@ -228,5 +233,26 @@ public class CardManager : MonoBehaviourPun
             else
                 x.GetComponent<Image>().raycastTarget = false;
         }
+    }
+
+    public IEnumerator SuffleDeck(int index)
+    {
+        yield return new WaitForSeconds(.5f);
+        for (int i =0;i< index; i++)
+        {
+            cardsUsed[i].transform.DOMove(cardsUsed[i].transform.position + new Vector3(-10, 0, 0), .15f);
+            yield return new WaitForSeconds(.05f);
+        }
+        yield return null;
+
+        foreach(var x in cardsUsed)
+        {
+            Destroy(x.gameObject);
+        }
+        cardsUsed.Clear();
+
+        playerDeck = initialDeck.Clone();
+        firstCount = playerDeck.deck.Count;
+        StartCoroutine(InstantiateCo());
     }
 }

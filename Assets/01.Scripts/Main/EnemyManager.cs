@@ -29,11 +29,6 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
-               if(cardManager.cardsOnSpwan.Count < 2)
-               {
-
-               }
-               else
                 cardManager.Draw();
             }
 
@@ -44,7 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator Thinking()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         GameObject gameObject;
         for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
         {
@@ -72,7 +67,7 @@ public class EnemyManager : MonoBehaviour
         UseSeq.Append(gameObject.transform.DOMove(this.transform.position, .5f));
         UseSeq.Insert(.1f, gameObject.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f));
         UseSeq.Join(gameObject.transform.DOScale(1, .5f));
-        UseSeq.Append(gameObject.transform.DOMove(fieldPos.transform.position, .5f)).OnComplete(() =>
+        UseSeq.Append(gameObject.transform.DOMove(fieldPos.transform.position + new Vector3(0,0,-30), .5f)).OnComplete(() =>
         {
             cardManager.UsedCard(gameObject);
             gameObject.transform.SetParent(fieldPos.transform, true);
