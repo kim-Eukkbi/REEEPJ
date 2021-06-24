@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
 {
     public CardManager cardManager;
     public GameObject fieldPos;
+    public DropArea fieldDropArea;
 
     bool isfirstTrun = true;
 
@@ -78,6 +79,7 @@ public class EnemyManager : MonoBehaviour
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.Translate(new Vector3(.01f, .01f, -0.1f) * cardManager.cardsUsed.Count);
             gameObject.GetComponent<CardHandler>().UseCard();
+            gameObject.GetComponent<DropItem>().droppedArea = fieldDropArea;
             gameObject.GetComponent<Image>().raycastTarget = false;
             int index = cardManager.CheckCard(gameObject);
             GameObject obj = cardManager.enemyPonCardList[index];

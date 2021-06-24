@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using Photon.Pun;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CardManager : MonoBehaviourPun
 {
@@ -58,6 +59,7 @@ public class CardManager : MonoBehaviourPun
         {
             if (Test.isMyturn)
             {
+                ReyCastReset(true);
                 if (cardsInHand.Count < 9)
                 {
                     GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
@@ -92,16 +94,18 @@ public class CardManager : MonoBehaviourPun
     {
         if (isPlayerTurn)
         {
+            ReyCastReset(false);
             for (int i = 0; i < ponCardList.Count; i++)
             {
-                cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, 1f);
+                cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f)
+                    .OnComplete(()=> ReyCastReset(true));
             }
         }
         else
         {
             for (int i = 0; i < enemyPonCardList.Count; i++)
             {
-                cardsInEnemyHand[i].transform.DOMove(enemyPonCardList[i].transform.position, 1f);
+                cardsInEnemyHand[i].transform.DOMove(enemyPonCardList[i].transform.position, .5f);
             }
         }
     }
@@ -212,6 +216,17 @@ public class CardManager : MonoBehaviourPun
         {
             Draw();
             yield return new WaitForSeconds(.15f);
+        }
+    }
+
+    public void ReyCastReset(bool isMytrun)
+    {
+        foreach (var x in cardsInHand)
+        {
+            if(isMytrun)
+                x.GetComponent<Image>().raycastTarget = true;
+            else
+                x.GetComponent<Image>().raycastTarget = false;
         }
     }
 }

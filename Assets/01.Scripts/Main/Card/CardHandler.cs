@@ -6,8 +6,6 @@ using Photon.Pun;
 
 public class CardHandler : MonoBehaviourPun
 {
-    //public bool IsMasterClientLocal => PhotonNetwork.IsMasterClient && photonView.IsMine;
-
     public Card card;
    
     public GameObject DecObj;
@@ -25,13 +23,6 @@ public class CardHandler : MonoBehaviourPun
         thisCard = gameObject.GetComponent<Image>();
     }
 
-    private void Update()
-    { 
-        if (Test.isMyturn)
-            thisCard.raycastTarget = true;
-        else
-            thisCard.raycastTarget = false;
-    }
 
     public void Initialize(Card drawCard)
     {

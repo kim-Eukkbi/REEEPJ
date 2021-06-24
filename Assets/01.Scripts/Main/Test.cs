@@ -63,6 +63,7 @@ public class Test : MonoBehaviour
             Destroy(obj);
             StartCoroutine(OrderCardCo());
         }
+        cardManager.ReyCastReset(false);
         DamageManager.Instance.ResetTurn();
     }
 
