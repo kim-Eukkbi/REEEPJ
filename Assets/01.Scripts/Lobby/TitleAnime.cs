@@ -17,7 +17,6 @@ public class TitleAnime : MonoBehaviour
     public GameObject ClickPanel;
     public GameObject OnlineButton;
     public GameObject OfflineButton;
-    public LobbyManager LobbyManager;
 
     private Sequence mainSeq;
     private Vector3 logoPos;
@@ -27,10 +26,6 @@ public class TitleAnime : MonoBehaviour
     private Vector3 onlineButtonPos;
     private Vector3 offlineButtonPos;
 
-    private void Awake()
-    {
-        LobbyManager.gameObject.SetActive(false);
-    }
 
     private void Start()
     {
@@ -104,7 +99,6 @@ public class TitleAnime : MonoBehaviour
         OnlineSeq.Insert(.5f, infoText.transform.DOMove(infoTextPos, 1.5f).SetEase(Ease.OutQuart));
         OnlineSeq.Join(joinButton.transform.DOMove(joinButtonPos,1.5f).SetEase(Ease.OutQuart)).OnComplete(()=>
         {
-            LobbyManager.gameObject.SetActive(true);
             OnlineSeq.Kill();
         });
     }

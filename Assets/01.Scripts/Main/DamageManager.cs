@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class DamageManager : MonoBehaviour
 {
@@ -105,7 +106,7 @@ public class DamageManager : MonoBehaviour
             DrawHpBar();
             if (hp < 0)
             {
-                GameOver();
+                StartCoroutine(GameOver());
             }
         }
         else
@@ -114,7 +115,7 @@ public class DamageManager : MonoBehaviour
             DrawHpBar();
             if (enemyHp < 0)
             {
-                GameOver();
+                StartCoroutine(GameOver());
             }
         }
     }
@@ -123,13 +124,13 @@ public class DamageManager : MonoBehaviour
     {
         if(Test.isMyturn)
         {
-            Hpbar.GetComponent<Slider>().value = hp / maxhp;
-            hptext.text = hp.ToString() + "/" + maxhp.ToString();
+            Hpbar.GetComponent<Slider>().DOValue(hp / maxhp, 2f).SetEase(Ease.OutQuart);
+            hptext.DOText(hp + "/" + maxhp, 2f).SetEase(Ease.OutQuart);
         }
         else
         {
-            enemyHpbar.GetComponent<Slider>().value = enemyHp / enemyMaxhp;
-            enemyHptext.text = enemyHp.ToString() + "/" + enemyMaxhp.ToString();
+            enemyHpbar.GetComponent<Slider>().DOValue(enemyHp / enemyMaxhp, 2f).SetEase(Ease.OutQuart);
+            enemyHptext.DOText(enemyHp + "/" + enemyMaxhp, 2f).SetEase(Ease.OutQuart);
         }
     }
 
@@ -137,12 +138,13 @@ public class DamageManager : MonoBehaviour
     {
         nowDamage = damage;
         totalDamage += damage;
-        nowDamageText.text = "현재:" + damage;
-        totalDamageText.text = "누적:" + totalDamage;
+        nowDamageText.DOText("현재:" + damage,.5f);
+        totalDamageText.DOText("누적:" + totalDamage,.5f);
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(2f);
         gameOverObj.SetActive(true);
     }
 

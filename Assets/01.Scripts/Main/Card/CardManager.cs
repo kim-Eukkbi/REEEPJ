@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Photon.Pun;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CardManager : MonoBehaviourPun
+public class CardManager : MonoBehaviour
 {
     public GameObject cardPrefab;
     public GameObject ponCardprefab;
