@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56b9ba34aa10294e9b46278794cbecc, type: 3}
+  m_Name: HanSim
+  m_EditorClassIdentifier: 
+  illuset: {fileID: 21300000, guid: 9784d9530b4ad1b48ab6198ba2c9f0d6, type: 3}
+  cardName: "\uD55C\uC2EC\uC88C"
+  cardDescription: "\uD55C\uC2EC\uC88C\uAC00 \uB2F9\uC2E0\uC758 \uD589\uB3D9\uC744
+    \uD55C\uC2EC\uD55C \uB4EF \uB530\uB77C \uD569\uB2C8\uB2E4."
+  cardDamage: 30
+  cardHeal: 0
+  seqOnUse: 
+  seqOnDraw: 
+  seqOnDrop: 
+  seqTurnEnd: 

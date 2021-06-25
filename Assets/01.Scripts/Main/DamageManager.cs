@@ -125,12 +125,12 @@ public class DamageManager : MonoBehaviour
         if(Test.isMyturn)
         {
             Hpbar.GetComponent<Slider>().DOValue(hp / maxhp, 2f).SetEase(Ease.OutQuart);
-            hptext.DOText(hp + "/" + maxhp, 2f).SetEase(Ease.OutQuart);
+            hptext.DOText(hp + "/" + maxhp, .5f).SetEase(Ease.OutQuart);
         }
         else
         {
             enemyHpbar.GetComponent<Slider>().DOValue(enemyHp / enemyMaxhp, 2f).SetEase(Ease.OutQuart);
-            enemyHptext.DOText(enemyHp + "/" + enemyMaxhp, 2f).SetEase(Ease.OutQuart);
+            enemyHptext.DOText(enemyHp + "/" + enemyMaxhp, .5f).SetEase(Ease.OutQuart);
         }
     }
 
