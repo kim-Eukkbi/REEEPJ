@@ -46,8 +46,10 @@ public class DamageManager : MonoBehaviour
         enemyHp = 250;
         maxhp = hp;
         enemyMaxhp = enemyHp;
-        enemyHptext.text = enemyHp.ToString();
-        hptext.text = hp.ToString();
+        Hpbar.GetComponent<Slider>().value = hp / maxhp;
+        hptext.text = hp.ToString() + "/" + maxhp.ToString();
+        enemyHpbar.GetComponent<Slider>().value = enemyHp / enemyMaxhp;
+        enemyHptext.text = enemyHp.ToString() + "/" + enemyMaxhp.ToString();
     }
 
     public void Update()
@@ -122,12 +124,12 @@ public class DamageManager : MonoBehaviour
         if(Test.isMyturn)
         {
             Hpbar.GetComponent<Slider>().value = hp / maxhp;
-            hptext.text = hp.ToString();
+            hptext.text = hp.ToString() + "/" + maxhp.ToString();
         }
         else
         {
             enemyHpbar.GetComponent<Slider>().value = enemyHp / enemyMaxhp;
-            enemyHptext.text = enemyHp.ToString();
+            enemyHptext.text = enemyHp.ToString() + "/" + enemyMaxhp.ToString();
         }
     }
 
