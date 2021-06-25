@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f56b9ba34aa10294e9b46278794cbecc, type: 3}
-  m_Name: nyannyanpunch
+  m_Name: TTing
   m_EditorClassIdentifier: 
-  illuset: {fileID: 21300000, guid: 3e071f3732ff9a246babb8d35796d001, type: 3}
-  cardName: "\uB0E5\uB0E5\uD380\uCE58"
-  cardDescription: "\uBABD\uC774\uAC00 \uB0E5\uB0E5\uD380\uCE58\uB97C \uB0A0\uB9B0\uB2E4"
-  cardDamage: 0
-  cardHeal: 20
+  illuset: {fileID: 21300000, guid: ebf2c98708fb3c44ead11e5d98aaecd2, type: 3}
+  cardName: "\uB775\uD610"
+  cardDescription: "\uC139\uB3C4\uC2DC\uBC1C."
+  cardDamage: 47
+  cardHeal: 0
   seqOnUse: 
   seqOnDraw: 
   seqOnDrop: 
