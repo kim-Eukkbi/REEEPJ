@@ -41,7 +41,11 @@ public class CardManager : MonoBehaviour
 
     public void Start()
     {
-        //StartGame();
+        DamageManager.Instance.OnNextTrun.AddListener(() =>
+        {
+            if (Test.isMyturn)
+                Draw();
+        });
     }
 
     public void Draw()
@@ -285,11 +289,6 @@ public class CardManager : MonoBehaviour
 
     public void StartGame()
     {
-        DamageManager.Instance.OnNextTrun.AddListener(() =>
-        {
-            if (Test.isMyturn)
-                Draw();
-        });
         playerDeck = initialDeck.Clone();
         firstCount = playerDeck.deck.Count;
         StartCoroutine(InstantiateCo());

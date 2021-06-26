@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
 
     public void Start()
     {
-        //StartEnemyManager();
+        DamageManager.Instance.OnNextTrun.AddListener(AI);
     }
 
     public void AI()
@@ -38,10 +38,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void StartEnemyManager()
-    {
-        DamageManager.Instance.OnNextTrun.AddListener(AI);
-    }
+
 
 
     public IEnumerator Thinking(float n)

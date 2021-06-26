@@ -19,7 +19,7 @@ public class GameOver : MonoBehaviour
 
     private Vector3 ReturnPos;
     private Vector3 WinPos;
-    private void Start()
+    private void OnEnable()
     {
         gameOverUI.SetActive(true);
         WinPos = WIN.transform.position;
