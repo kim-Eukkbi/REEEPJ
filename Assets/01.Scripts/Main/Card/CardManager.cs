@@ -281,10 +281,6 @@ public class CardManager : MonoBehaviour
         cardsUsed.Clear();
         ponCardList.Clear();
         enemyPonCardList.Clear();
-        playerDeck = initialDeck.Clone();
-        firstCount = playerDeck.deck.Count;
-        StartCoroutine(InstantiateCo());
-        StartCoroutine(FirstDraw());
     }
 
     public void StartGame()

@@ -11,11 +11,11 @@ public class EnemyManager : MonoBehaviour
     public GameObject fieldPos;
     public DropArea fieldDropArea;
 
-    bool isfirstTrun = true;
+    public bool isfirstTrun = true;
 
     public void Start()
     {
-        DamageManager.Instance.OnNextTrun.AddListener(AI);
+        //StartEnemyManager();
     }
 
     public void AI()
@@ -36,6 +36,11 @@ public class EnemyManager : MonoBehaviour
 
             
         }
+    }
+
+    public void StartEnemyManager()
+    {
+        DamageManager.Instance.OnNextTrun.AddListener(AI);
     }
 
 

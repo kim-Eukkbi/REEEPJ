@@ -1169,6 +1169,7 @@ MonoBehaviour:
   cardUI: {fileID: 1949986928}
   EctUI: {fileID: 157342919}
   cardM: {fileID: 1084110776}
+  enemyM: {fileID: 1909854074}
 --- !u!1 &517282235
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,6 +3947,7 @@ MonoBehaviour:
   cardManager: {fileID: 1084110776}
   fieldPos: {fileID: 1687082776}
   fieldDropArea: {fileID: 517282237}
+  isfirstTrun: 1
 --- !u!1 &1949986928
 GameObject:
   m_ObjectHideFlags: 0
