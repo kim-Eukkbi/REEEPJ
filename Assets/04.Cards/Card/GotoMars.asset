@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9
   tagString: Tesla
-  isDamageCard: 0
-  isHealCard: 1
+  isDamageCard: 1
+  isHealCard: 0
   power: {fileID: 11400000, guid: 0b3fd409a20114f4c944fc449474bcc1, type: 2}
   damage: 0
   heal: 0

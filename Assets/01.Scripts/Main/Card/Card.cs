@@ -34,6 +34,23 @@ public class Card : ScriptableObject
     public Card clone()
     {
         var card = CreateInstance<Card>();
+        switch (power.cardName)
+        {
+            case "화성 갈끄니까~":
+                power.cardDamage = Random.Range(1, 81);
+                power.cardHeal = Random.Range(1, 81);
+                if (Random.Range(0, 2).Equals(0))
+                {
+                    isDamageCard = true;
+                    isHealCard = false;
+                }
+                else
+                {
+                    isDamageCard = false;
+                    isHealCard = true;
+                }
+                break;
+        }
         card.Init(id, tagString, power, isDamageCard, isHealCard);
         return card;
     }
