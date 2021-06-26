@@ -315,7 +315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -678, y: 276}
+  m_AnchoredPosition: {x: -678, y: 326}
   m_SizeDelta: {x: 600, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &353857568
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a158d2c9c7933304f897019a5975a85c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6b937188f2605e48b758881b9868d33, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -419,7 +419,6 @@ MonoBehaviour:
   ClickPanel: {fileID: 1627513658}
   OnlineButton: {fileID: 733697871}
   OfflineButton: {fileID: 2036269113}
-  LobbyManager: {fileID: 921196361}
 --- !u!1 &552034848
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -678.01, y: -131.95}
+  m_AnchoredPosition: {x: -678.01, y: -85.95}
   m_SizeDelta: {x: 599.99, y: 215.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &552034850
@@ -754,8 +753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc53fa041c33ec247b17e274cdd60bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionInfoText: {fileID: 309053035}
-  joinButton: {fileID: 1940480716}
 --- !u!1 &1052996175
 GameObject:
   m_ObjectHideFlags: 0

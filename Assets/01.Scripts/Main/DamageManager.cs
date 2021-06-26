@@ -31,6 +31,8 @@ public class DamageManager : MonoBehaviour
     public GameObject Hpbar;
     public GameObject enemyHpbar;
     public GameObject gameOverObj;
+    public GameObject hitEffect;
+    public GameObject healEffect;
 
     public float totalDamage;
     public float nowDamage;
@@ -87,14 +89,14 @@ public class DamageManager : MonoBehaviour
             hp += heal;
             if (hp > maxhp)
                 maxhp = hp;
-            DrawHpBar();
+            DrawHpBar(false);
         }
         else
         {
             enemyHp += heal;
             if (enemyHp > enemyMaxhp)
                 enemyMaxhp = enemyHp;
-            DrawHpBar();
+            DrawHpBar(false);
         }
     }
 
@@ -103,24 +105,24 @@ public class DamageManager : MonoBehaviour
         if(Test.isMyturn)
         {
             hp -= totalDamage;
-            DrawHpBar();
+            DrawHpBar(true);
             if (hp < 0)
             {
-                StartCoroutine(GameOver());
+                StartCoroutine(GameOver(true));
             }
         }
         else
         {
             enemyHp -= totalDamage;
-            DrawHpBar();
+            DrawHpBar(true);
             if (enemyHp < 0)
             {
-                StartCoroutine(GameOver());
+                StartCoroutine(GameOver(false));
             }
         }
     }
 
-    public void DrawHpBar()
+    public void DrawHpBar(bool isDamage)
     {
         if(Test.isMyturn)
         {
@@ -132,6 +134,20 @@ public class DamageManager : MonoBehaviour
             enemyHpbar.GetComponent<Slider>().DOValue(enemyHp / enemyMaxhp, 2f).SetEase(Ease.OutQuart);
             enemyHptext.DOText(enemyHp + "/" + enemyMaxhp, .5f).SetEase(Ease.OutQuart);
         }
+
+        Sequence HitSeq = DOTween.Sequence();
+        if(isDamage)
+        {
+            HitSeq.Append(Camera.main.DOShakePosition(.5f, .5f, 20, 90, false));
+            HitSeq.Join(hitEffect.GetComponent<Image>().DOFade(.5f, .25f));
+            HitSeq.Append(hitEffect.GetComponent<Image>().DOFade(0, .25f));
+        }
+        else
+        {
+            HitSeq.Append(healEffect.GetComponent<Image>().DOFade(.5f, .25f));
+            HitSeq.Append(healEffect.GetComponent<Image>().DOFade(0, .25f));
+        }
+
     }
 
     public void Damazing(float damage)
@@ -142,10 +158,17 @@ public class DamageManager : MonoBehaviour
         totalDamageText.DOText("´©Àû:" + totalDamage,.5f);
     }
 
-    public IEnumerator GameOver()
+    public IEnumerator GameOver(bool isplayerDead)
     {
-        yield return new WaitForSeconds(2f);
-        gameOverObj.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        if(isplayerDead)
+        {
+            gameOverObj.SetActive(true);
+        }
+        else
+        {
+            //gameOverObj.SetActive(true);
+        }
     }
 
     public void ResetTurn()

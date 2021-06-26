@@ -16,8 +16,8 @@ public class CardManager : MonoBehaviour
     public Transform enemyCardInstantiateRectPos;
     public Transform enemycardObjectPos;
     public Transform cardStackPos;
-    public DropArea playerDropArea;
-    public DropArea enemyDropArea;
+/*    public DropArea playerDropArea;
+    public DropArea enemyDropArea;*/
     public GameObject DesObj;
     public GameObject NowDamage;
     public GameObject TotalDamage;
@@ -100,16 +100,27 @@ public class CardManager : MonoBehaviour
     {
         if (isPlayerTurn)
         {
-            ReyCastReset(false);
-            for (int i = 0; i < ponCardList.Count; i++)
+            if(Test.isMyturn)
             {
-                cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f)
-                    .OnComplete(()=> ReyCastReset(true));
+                ReyCastReset(false);
+                for (int i = 0; i < ponCardList.Count; i++)
+                {
+                    cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f)
+                        .OnComplete(() => ReyCastReset(true));
+                }
             }
+            else
+            {
+                ReyCastReset(false);
+                for (int i = 0; i < ponCardList.Count; i++)
+                {
+                    cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f);
+                }
+            }
+        
         }
         else
         {
-            ReyCastReset(false);
             for (int i = 0; i < enemyPonCardList.Count; i++)
             {
                 cardsInEnemyHand[i].transform.DOMove(enemyPonCardList[i].transform.position, .5f);
@@ -147,24 +158,23 @@ public class CardManager : MonoBehaviour
         cardsOnSpwan.Remove(drawCardHandler);
         if (isPlayerTurn)
         {
-            ReyCastReset(false);
             cardsInHand.Add(drawCardHandler);
             drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 3, drawCardPos.y, drawCardPos.z - 2), .5f));
             drawSeq.Insert(.1f, drawCard.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f)).OnComplete(() =>
             {
-                drawCard.GetComponent<DropItem>().droppedArea = playerDropArea;
+                //drawCard.GetComponent<DropItem>().droppedArea = playerDropArea;
                 drawCard.transform.SetParent(playercardObjectPos);
                 OrderCard(true);
+                ReyCastReset(true);
             });
         }
         else
         {
-            ReyCastReset(false);
             cardsInEnemyHand.Add(drawCardHandler);
             drawSeq.Append(drawCard.transform.DOMove(new Vector3(drawCardPos.x - 5, drawCardPos.y, drawCardPos.z - 2), .5f));
             drawSeq.Insert(.1f, drawCard.transform.DOScale(.5f, .5f)).OnComplete(() =>
             {
-                drawCard.GetComponent<DropItem>().droppedArea = enemyDropArea;
+                //drawCard.GetComponent<DropItem>().droppedArea = enemyDropArea;
                 drawCard.transform.SetParent(enemycardObjectPos);
                 OrderCard(false);
             });
@@ -224,7 +234,6 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             Draw();
-            yield return new WaitForSeconds(.15f);
         }
     }
 

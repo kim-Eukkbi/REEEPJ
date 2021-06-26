@@ -49,6 +49,7 @@ public class TitleAnime : MonoBehaviour
 
         mainSeq = DOTween.Sequence();
         mainSeq.Append(logo.transform.DOMove(logoPos, 1.5f).SetEase(Ease.OutQuart));
+        mainSeq.Insert(.5f,logo.transform.DORotateQuaternion(Quaternion.Euler(0,0, 180), 1.5f).SetEase(Ease.OutQuart));
         mainSeq.Insert(1f, cardGameText.transform.DOMove(cardGamePos, 1f).SetEase(Ease.OutQuart));
         mainSeq.Append(_flash.DOFade(1, 0.5f).SetEase(Ease.InOutElastic));
         mainSeq.Append(_flash.DOFade(0, 1f)).OnComplete(()=> 
