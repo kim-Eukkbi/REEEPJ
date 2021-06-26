@@ -61,6 +61,7 @@ public class DamageManager : MonoBehaviour
         time.text = string.Format("Time : {0:0.00}",remainTime);
         if(remainTime <= 0)
         {
+            DamagePlayer(0, false);
             remainTime = 30;
             Test.isMyturn = !Test.isMyturn;
             OnNextTrun.Invoke();
@@ -167,7 +168,7 @@ public class DamageManager : MonoBehaviour
         }
         else
         {
-            //gameOverObj.SetActive(true);
+            gameOverObj.SetActive(true);
         }
     }
 
