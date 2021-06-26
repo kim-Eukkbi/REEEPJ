@@ -28,11 +28,15 @@ public class DamageManager : MonoBehaviour
     public Text hptext;
     public Text enemyHptext;
     public Text time;
+    public Text turnIndecator;
+    public Text Win;
     public GameObject Hpbar;
     public GameObject enemyHpbar;
     public GameObject gameOverObj;
     public GameObject hitEffect;
     public GameObject healEffect;
+    public GameObject turnIndecatorObj;
+
 
     public float totalDamage;
     public float nowDamage;
@@ -62,9 +66,7 @@ public class DamageManager : MonoBehaviour
         if(remainTime <= 0)
         {
             DamagePlayer(0, false);
-            remainTime = 30;
-            Test.isMyturn = !Test.isMyturn;
-            OnNextTrun.Invoke();
+            ResetTurn();
         }
     }
 
@@ -165,10 +167,12 @@ public class DamageManager : MonoBehaviour
         if(isplayerDead)
         {
             gameOverObj.SetActive(true);
+            Win.text = "LOSE";
         }
         else
         {
             gameOverObj.SetActive(true);
+            Win.text = "WIN";
         }
     }
 
@@ -176,6 +180,16 @@ public class DamageManager : MonoBehaviour
     {
         remainTime = 30;
         Test.isMyturn = !Test.isMyturn;
+        if (Test.isMyturn)
+        {
+            turnIndecatorObj.transform.DORotateQuaternion(Quaternion.Euler(360, 0, 0), 1f);
+            turnIndecator.DOText("MyTurn", 1f);
+        }
+        else
+        {
+            turnIndecatorObj.transform.transform.DORotateQuaternion(Quaternion.Euler(180, 0, 0), 1f);
+            turnIndecator.DOText("AiTurn", 1f);
+        }
         OnNextTrun.Invoke();
     }
 }

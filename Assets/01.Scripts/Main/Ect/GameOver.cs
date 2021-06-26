@@ -13,19 +13,26 @@ public class GameOver : MonoBehaviour
     public GameObject gameOverImage;
     public GameObject ClickToTitleText;
     public GameObject ReturnTitle;
+    public GameObject WIN;
 
     private Vector3 ReturnPos;
+    private Vector3 WinPos;
     private void Start()
     {
         gameOverUI.SetActive(true);
+        WinPos = WIN.transform.position;
         ReturnPos = ClickToTitleText.transform.position;
+
         ClickToTitleText.transform.position -= new Vector3(0, 10, 0);
+        WIN.transform.position -= new Vector3(0, 10, 0);
+
         Sequence MainSeq = DOTween.Sequence();
         cardUI.SetActive(false);
         ectUI.SetActive(false);
         MainSeq.Append(Camera.main.transform.DOShakePosition(1.5f,.5f,20,90,false,false));
         MainSeq.Append(gameOverImage.GetComponent<Image>().DOFade(1,2f));
-        MainSeq.Append(ClickToTitleText.transform.DOMove(ReturnPos, 1f));
+        MainSeq.Append(WIN.transform.DOMove(WinPos, .5f));
+        MainSeq.Join(ClickToTitleText.transform.DOMove(ReturnPos, .5f));
     }
 
     public void ClickToTitle()
