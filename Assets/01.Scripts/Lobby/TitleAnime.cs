@@ -106,6 +106,7 @@ public class TitleAnime : MonoBehaviour
 
     public void OfflineClick()
     {
-        SceneManager.LoadScene("Main");
+        mainSeq.Kill();
+        SceneManager.LoadScene("Main",LoadSceneMode.Single);
     }
 }

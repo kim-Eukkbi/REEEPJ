@@ -41,15 +41,7 @@ public class CardManager : MonoBehaviour
 
     public void Start()
     {
-        DamageManager.Instance.OnNextTrun.AddListener(() =>
-        {
-            if (Test.isMyturn)
-                Draw();
-        });
-        playerDeck = initialDeck.Clone();
-        firstCount = playerDeck.deck.Count;
-        StartCoroutine(InstantiateCo());
-        StartCoroutine(FirstDraw());
+        //StartGame();
     }
 
     public void Draw()
@@ -267,5 +259,44 @@ public class CardManager : MonoBehaviour
         playerDeck = initialDeck.Clone();
         firstCount = playerDeck.deck.Count;
         StartCoroutine(InstantiateCo());
+    }
+
+    public void ResetGame()
+    {
+        foreach(var x in cardsOnSpwan)
+            Destroy(x.gameObject);
+        foreach (var x in cardsInHand)
+            Destroy(x.gameObject);
+        foreach (var x in cardsInEnemyHand)
+            Destroy(x.gameObject);
+        foreach (var x in cardsUsed)
+            Destroy(x.gameObject);
+        foreach (var x in ponCardList)
+            Destroy(x.gameObject);
+        foreach (var x in enemyPonCardList)
+            Destroy(x.gameObject);
+        cardsOnSpwan.Clear();
+        cardsInHand.Clear();
+        cardsInEnemyHand.Clear();
+        cardsUsed.Clear();
+        ponCardList.Clear();
+        enemyPonCardList.Clear();
+        playerDeck = initialDeck.Clone();
+        firstCount = playerDeck.deck.Count;
+        StartCoroutine(InstantiateCo());
+        StartCoroutine(FirstDraw());
+    }
+
+    public void StartGame()
+    {
+        DamageManager.Instance.OnNextTrun.AddListener(() =>
+        {
+            if (Test.isMyturn)
+                Draw();
+        });
+        playerDeck = initialDeck.Clone();
+        firstCount = playerDeck.deck.Count;
+        StartCoroutine(InstantiateCo());
+        StartCoroutine(FirstDraw());
     }
 }

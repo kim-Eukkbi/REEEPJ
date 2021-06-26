@@ -9,11 +9,13 @@ public class GameOver : MonoBehaviour
 {
     public GameObject cardUI;
     public GameObject ectUI;
+    public GameObject startUI;
     public GameObject gameOverUI;
     public GameObject gameOverImage;
     public GameObject ClickToTitleText;
     public GameObject ReturnTitle;
     public GameObject WIN;
+    public CardManager CardManager;
 
     private Vector3 ReturnPos;
     private Vector3 WinPos;
@@ -38,7 +40,9 @@ public class GameOver : MonoBehaviour
     public void ClickToTitle()
     {
         print("·Îµå");
-        SceneManager.LoadScene("Lobby");
-        this.gameObject.SetActive(false);
+        startUI.SetActive(true);
+        gameOverUI.SetActive(false);
+        CardManager.ResetGame();
+        DamageManager.Instance.ResetGame();
     }
 }

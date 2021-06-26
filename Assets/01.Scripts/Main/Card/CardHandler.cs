@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CardHandler : MonoBehaviour
 {
     public Card card;
-   
     public GameObject DecObj;
     public Image illuset;
     public Text cardName;

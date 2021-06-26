@@ -48,15 +48,7 @@ public class DamageManager : MonoBehaviour
 
     public void Start()
     {
-        remainTime = 30;
-        hp = 250;
-        enemyHp = 250;
-        maxhp = hp;
-        enemyMaxhp = enemyHp;
-        Hpbar.GetComponent<Slider>().value = hp / maxhp;
-        hptext.text = hp.ToString() + "/" + maxhp.ToString();
-        enemyHpbar.GetComponent<Slider>().value = enemyHp / enemyMaxhp;
-        enemyHptext.text = enemyHp.ToString() + "/" + enemyMaxhp.ToString();
+        ResetGame();
     }
 
     public void Update()
@@ -191,5 +183,21 @@ public class DamageManager : MonoBehaviour
             turnIndecator.DOText("AiTurn", 1f);
         }
         OnNextTrun.Invoke();
+    }
+
+    public void ResetGame()
+    {
+        remainTime = 30;
+        Test.isMyturn = true;
+        hp = 250;
+        enemyHp = 250;
+        maxhp = hp;
+        enemyMaxhp = enemyHp;
+        Hpbar.GetComponent<Slider>().value = hp / maxhp;
+        hptext.text = hp.ToString() + "/" + maxhp.ToString();
+        enemyHpbar.GetComponent<Slider>().value = enemyHp / enemyMaxhp;
+        enemyHptext.text = enemyHp.ToString() + "/" + enemyMaxhp.ToString();
+        totalDamage = 0;
+        Damazing(0);
     }
 }
