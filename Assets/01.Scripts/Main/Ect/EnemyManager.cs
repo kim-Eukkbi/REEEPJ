@@ -44,31 +44,25 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator Thinking(float n)
     {
         yield return new WaitForSeconds(n);
-        CardHandler gameObject;
-        IEnumerable<CardHandler> Card = cardManager.cardsInEnemyHand.OrderBy(x => x.card.damage);
-       /* if (Card.First().card.damage > DamageManager.Instance.nowDamage)
-        {
-            AIUseCard(Card.First().gameObject);
-            yield break;
-        }*/
+
+        IEnumerable<CardHandler> CardDamage = cardManager.cardsInEnemyHand.OrderBy(x => x.card.damage);
+        //IEnumerable<CardHandler> CardHeal = cardManager.cardsInEnemyHand.OrderBy(x => x.card.heal);
 
         for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
         {
-            if (Card.ToList()[i].card.damage > DamageManager.Instance.nowDamage)
+            if (CardDamage.ToList()[i].card.damage > DamageManager.Instance.nowDamage)
             {
-                AIUseCard(Card.ToList()[i].gameObject);
+                AIUseCard(CardDamage.ToList()[i].gameObject);
                 yield break;
             }
-            else if (Card.ToList()[i].card.isHealCard == true)   
+            else if (cardManager.cardsInEnemyHand[i].card.isHealCard == true)   
             {
-                gameObject = cardManager.cardsInEnemyHand
-                .OrderByDescending(x => x.card.heal).Last();
-                AIUseCard(gameObject.gameObject);
+                AIUseCard(cardManager.cardsInEnemyHand[i].gameObject);
                 yield break;
             }
         }
 
-        //AIUseCard(Card.Last().gameObject);
+        AIUseCard(CardDamage.Last().gameObject);
     }
 
     public void AIUseCard(GameObject gameObject)
@@ -77,9 +71,9 @@ public class EnemyManager : MonoBehaviour
         UseSeq.Append(gameObject.transform.DOMove(this.transform.position, .5f));
         UseSeq.Insert(.1f, gameObject.transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f));
         UseSeq.Join(gameObject.transform.DOScale(1, .5f));
-        UseSeq.Append(gameObject.transform.DOMove(cardManager.cardsUsed.Count == 1 ? 
-            cardManager.cardsUsed[cardManager.cardsUsed.Count -1].transform.position + new Vector3(0,0,-30)
-            :fieldPos.transform.position + new Vector3(0, 0, -30), .5f)).OnComplete(() =>
+        UseSeq.Append(gameObject.transform.DOMove(cardManager.cardsUsed.Count == 0 ? 
+            fieldPos.transform.position + new Vector3(0, 0, -30) :
+            cardManager.cardsUsed[cardManager.cardsUsed.Count - 1].transform.position + new Vector3(0, 0, -30), .5f)).OnComplete(() =>
         {
             cardManager.UsedCard(gameObject);
             gameObject.transform.SetParent(fieldPos.transform, true);

@@ -200,4 +200,10 @@ public class DamageManager : MonoBehaviour
         totalDamage = 0;
         Damazing(0);
     }
+
+    public void TurnEnd()
+    {
+        print("ÅÏ¿£µå");
+        ResetTurn();
+    }
 }

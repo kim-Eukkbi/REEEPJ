@@ -33,6 +33,7 @@ public class Test : MonoBehaviour
     private void ObjectLiftedFromPlayer(DropArea area, GameObject gameObject)
     {
         gameObject.transform.SetParent(hoverRectParent, true);
+       // gameObject.transform.Translate(new Vector3(0, 0, -1f));
     }
 
     private void ObjectDroppedPlayer(DropArea area, GameObject gameObject)
