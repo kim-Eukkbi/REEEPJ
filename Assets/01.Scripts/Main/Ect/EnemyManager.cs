@@ -44,25 +44,31 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator Thinking(float n)
     {
         yield return new WaitForSeconds(n);
-        GameObject gameObject;
+        CardHandler gameObject;
+        IEnumerable<CardHandler> Card = cardManager.cardsInEnemyHand.OrderBy(x => x.card.damage);
+       /* if (Card.First().card.damage > DamageManager.Instance.nowDamage)
+        {
+            AIUseCard(Card.First().gameObject);
+            yield break;
+        }*/
+
         for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
         {
-            if (cardManager.cardsInEnemyHand[i].card.damage > DamageManager.Instance.nowDamage)
+            if (Card.ToList()[i].card.damage > DamageManager.Instance.nowDamage)
             {
-                gameObject =  cardManager.cardsInEnemyHand[i].gameObject;
-                AIUseCard(gameObject);
+                AIUseCard(Card.ToList()[i].gameObject);
                 yield break;
             }
-            else if (cardManager.cardsInEnemyHand[i].card.heal > DamageManager.Instance.nowDamage)
+            else if (Card.ToList()[i].card.isHealCard == true)   
             {
-                gameObject = cardManager.cardsInEnemyHand[i].gameObject;
-                AIUseCard(gameObject);
+                gameObject = cardManager.cardsInEnemyHand
+                .OrderByDescending(x => x.card.heal).Last();
+                AIUseCard(gameObject.gameObject);
                 yield break;
             }
         }
-        gameObject = cardManager.cardsInEnemyHand
-        .OrderByDescending(x => x.card.damage).First().gameObject;
-        AIUseCard(gameObject);
+
+        //AIUseCard(Card.Last().gameObject);
     }
 
     public void AIUseCard(GameObject gameObject)

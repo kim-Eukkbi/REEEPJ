@@ -189,8 +189,8 @@ public class DamageManager : MonoBehaviour
     {
         remainTime = 30;
         Test.isMyturn = true;
-        hp = 250;
-        enemyHp = 250;
+        hp = 400;
+        enemyHp = 400;
         maxhp = hp;
         enemyMaxhp = enemyHp;
         Hpbar.GetComponent<Slider>().value = hp / maxhp;
