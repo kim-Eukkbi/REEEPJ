@@ -256,10 +256,19 @@ public class CardManager : MonoBehaviour
                     usedCardHandler.card.damage = 100;
                 break;
             case "유니세프":
-                if(cardsOnSpwan.Count >=2)
+                if(cardsOnSpwan.Count >2)
                 {
                     Draw();
                     Draw();
+                }
+                break;
+            case "함영찬":
+                if (cardsOnSpwan.Count > 2)
+                {
+                    Draw();
+                    Test.isMyturn = !Test.isMyturn;
+                    Draw();
+                    Test.isMyturn = !Test.isMyturn;
                 }
                 break;
             default:

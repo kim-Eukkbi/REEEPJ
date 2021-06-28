@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65566075c1f60584cb79a92757da86f5, type: 3}
+  m_Name: Tach
+  m_EditorClassIdentifier: 
+  id: 20
+  tagString: ect
+  isDamageCard: 1
+  isHealCard: 0
+  isBenefitCard: 0
+  power: {fileID: 11400000, guid: b12ebd58e4f00af4a9c939d7c6739c6b, type: 2}
+  damage: 0
+  heal: 0
