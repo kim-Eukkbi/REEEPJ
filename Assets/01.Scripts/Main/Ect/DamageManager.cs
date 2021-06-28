@@ -30,6 +30,7 @@ public class DamageManager : MonoBehaviour
     public Text time;
     public Text turnIndecator;
     public Text Win;
+    public GameObject healOrDealObj;
     public GameObject Hpbar;
     public GameObject enemyHpbar;
     public GameObject gameOverObj;
@@ -86,14 +87,14 @@ public class DamageManager : MonoBehaviour
             hp += heal;
             if (hp > maxhp)
                 maxhp = hp;
-            DrawHpBar(false);
+            DrawHpBar(false, heal);
         }
         else
         {
             enemyHp += heal;
             if (enemyHp > enemyMaxhp)
                 enemyMaxhp = enemyHp;
-            DrawHpBar(false);
+            DrawHpBar(false, heal);
         }
     }
 
@@ -102,7 +103,7 @@ public class DamageManager : MonoBehaviour
         if(Test.isMyturn)
         {
             hp -= totalDamage;
-            DrawHpBar(true);
+            DrawHpBar(true, totalDamage);
             if (hp < 0)
             {
                 StartCoroutine(GameOver(true));
@@ -111,7 +112,7 @@ public class DamageManager : MonoBehaviour
         else
         {
             enemyHp -= totalDamage;
-            DrawHpBar(true);
+            DrawHpBar(true, totalDamage);
             if (enemyHp < 0)
             {
                 StartCoroutine(GameOver(false));
@@ -119,15 +120,17 @@ public class DamageManager : MonoBehaviour
         }
     }
 
-    public void DrawHpBar(bool isDamage)
+    public void DrawHpBar(bool isDamage,float index)
     {
         if(Test.isMyturn)
         {
+            HealOrDamageEff(Hpbar, isDamage, index);
             Hpbar.GetComponent<Slider>().DOValue(hp / maxhp, 2f).SetEase(Ease.OutQuart);
             hptext.DOText(hp + "/" + maxhp, .5f).SetEase(Ease.OutQuart);
         }
         else
         {
+            HealOrDamageEff(enemyHpbar, isDamage, index);
             enemyHpbar.GetComponent<Slider>().DOValue(enemyHp / enemyMaxhp, 2f).SetEase(Ease.OutQuart);
             enemyHptext.DOText(enemyHp + "/" + enemyMaxhp, .5f).SetEase(Ease.OutQuart);
         }
@@ -209,5 +212,27 @@ public class DamageManager : MonoBehaviour
     {
         print("ÅÏ¿£µå");
         ResetTurn();
+    }
+
+    public void HealOrDamageEff(GameObject gameObject,bool isDamage,float index)
+    {
+        Sequence EffectSeq = DOTween.Sequence();
+        GameObject effect;
+        Text effText;
+        effect = Instantiate(healOrDealObj, this.gameObject.transform.position, Quaternion.identity, this.gameObject.transform);
+        effText = effect.GetComponent<Text>();
+        effText.DOFade(1, .01f);
+        if (isDamage)
+        {
+            effText.text = "-" + index.ToString();
+            effText.color = Color.red;
+        }
+        else
+        {
+            effText.text = "+" + index.ToString();
+            effText.color = Color.green;
+        }
+        EffectSeq.Append(effect.transform.DOMove(gameObject.transform.position, 2f));
+        EffectSeq.Insert(.5f,effect.GetComponent<Text>().DOFade(0, 1f)).OnComplete(()=> Destroy(effect));
     }
 }
