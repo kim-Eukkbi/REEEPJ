@@ -36,6 +36,7 @@ public class DamageManager : MonoBehaviour
     public GameObject hitEffect;
     public GameObject healEffect;
     public GameObject turnIndecatorObj;
+    public Slider timerBar;
 
 
     public float totalDamage;
@@ -55,7 +56,8 @@ public class DamageManager : MonoBehaviour
     {
         remainTime -= Time.deltaTime;
         time.text = string.Format("Time : {0:0.00}",remainTime);
-        if(remainTime <= 0)
+        timerBar.value = remainTime / 30;
+        if (remainTime <= 0)
         {
             DamagePlayer(0, false);
             ResetTurn();
@@ -170,6 +172,7 @@ public class DamageManager : MonoBehaviour
 
     public void ResetTurn()
     {
+        //timerBar.DOValue(1, .5f);
         remainTime = 30;
         Test.isMyturn = !Test.isMyturn;
         if (Test.isMyturn)
@@ -188,6 +191,7 @@ public class DamageManager : MonoBehaviour
     public void ResetGame()
     {
         remainTime = 30;
+        //timerBar.DOValue(1, .5f);
         Test.isMyturn = true;
         hp = 400;
         enemyHp = 400;

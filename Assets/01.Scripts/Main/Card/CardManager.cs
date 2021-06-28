@@ -237,7 +237,6 @@ public class CardManager : MonoBehaviour
                     {
                         if (cardsInHand.Count <= 1)
                             break;
-
                         int x = UnityEngine.Random.Range(0, cardsInHand.Count);
                         GameObject rCard = cardsInHand[x].gameObject;
                         GameObject rPonCard = ponCardList[x].gameObject;
