@@ -38,7 +38,7 @@ public class Test : MonoBehaviour
 
     private void ObjectDroppedPlayer(DropArea area, GameObject gameObject)
     {
-        cardManager.OrderCard(true);
+        StartCoroutine(cardManager.OrderCard(true,true));
         gameObject.transform.SetParent(playerRectParent, true);
     }
 
@@ -64,14 +64,14 @@ public class Test : MonoBehaviour
             Destroy(obj);
             StartCoroutine(OrderCardCo());
         }
-        cardManager.ReyCastReset(false);
+        StartCoroutine(cardManager.ReyCastReset(false));
         DamageManager.Instance.ResetTurn();
     }
 
     private IEnumerator OrderCardCo()
     {
         yield return null;
-        cardManager.OrderCard(true);
+        StartCoroutine(cardManager.OrderCard(true,false));
     }
 
     /*private void SetDropArea(bool active)

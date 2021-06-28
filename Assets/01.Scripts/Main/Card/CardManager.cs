@@ -50,17 +50,19 @@ public class CardManager : MonoBehaviour
 
     public void Draw()
     {
+        if (cardsOnSpwan.Count < 2)
+        {
+            StartCoroutine(ReyCastReset(false));
+            StartCoroutine(SuffleDeck(cardsUsed.Count));
+            Invoke("Draw", 5f);
+        }
+
         if (isEndCardSpawn)
         {
-            if (cardsOnSpwan.Count < 2)
-            {
-                ReyCastReset(false);
-                StartCoroutine(SuffleDeck(cardsUsed.Count));
-            }
 
             if (Test.isMyturn)
             {
-                ReyCastReset(false);
+                StartCoroutine(ReyCastReset(false));
                 if (cardsInHand.Count < 9)
                 {
                     GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
@@ -75,7 +77,7 @@ public class CardManager : MonoBehaviour
             }
             else
             {
-                ReyCastReset(false);
+                StartCoroutine(ReyCastReset(false));
                 if (cardsInEnemyHand.Count < 9)
                 {
                     GameObject drawCard = cardsOnSpwan[firstCount - 1].gameObject;
@@ -92,22 +94,27 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void OrderCard(bool isPlayerTurn)
+    public IEnumerator OrderCard(bool isPlayerTurn,bool isNeedRayOn = false,float delay = 0)
     {
         if (isPlayerTurn)
         {
             if(Test.isMyturn)
             {
-                ReyCastReset(false);
+                StartCoroutine(ReyCastReset(false));
                 for (int i = 0; i < ponCardList.Count; i++)
                 {
-                    cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f)
-                        .OnComplete(() => ReyCastReset(true));
+                    if (isNeedRayOn)
+                    {
+                        cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f)
+                     .OnComplete(() => StartCoroutine(ReyCastReset(true, delay)));
+                    }
+                    else
+                        cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f);
                 }
             }
             else
             {
-                ReyCastReset(false);
+                StartCoroutine(ReyCastReset(false));
                 for (int i = 0; i < ponCardList.Count; i++)
                 {
                     cardsInHand[i].transform.DOMove(ponCardList[i].transform.position, .5f);
@@ -122,6 +129,8 @@ public class CardManager : MonoBehaviour
                 cardsInEnemyHand[i].transform.DOMove(enemyPonCardList[i].transform.position, .5f);
             }
         }
+
+        yield return null;
     }
 
     public int CheckCard(GameObject gameObject)
@@ -160,8 +169,7 @@ public class CardManager : MonoBehaviour
             {
                 //drawCard.GetComponent<DropItem>().droppedArea = playerDropArea;
                 drawCard.transform.SetParent(playercardObjectPos);
-                OrderCard(true);
-                ReyCastReset(true);
+                StartCoroutine(OrderCard(true,true,0));
             });
         }
         else
@@ -172,7 +180,7 @@ public class CardManager : MonoBehaviour
             {
                 //drawCard.GetComponent<DropItem>().droppedArea = enemyDropArea;
                 drawCard.transform.SetParent(enemycardObjectPos);
-                OrderCard(false);
+                StartCoroutine(OrderCard(false));
             });
         }
 
@@ -246,7 +254,7 @@ public class CardManager : MonoBehaviour
                         Destroy(rPonCard);
                     }
                 }
-                OrderCard(!Test.isMyturn);
+                StartCoroutine(OrderCard(!Test.isMyturn));
                 break;
             case "일격에주님곁으로":
                 int a = UnityEngine.Random.Range(0, 2);
@@ -256,19 +264,19 @@ public class CardManager : MonoBehaviour
                     usedCardHandler.card.damage = 100;
                 break;
             case "유니세프":
-                if(cardsOnSpwan.Count >2)
+                if(cardsOnSpwan.Count >= 3)
                 {
                     Draw();
                     Draw();
                 }
                 break;
             case "함영찬":
-                if (cardsOnSpwan.Count > 2)
+                if (cardsOnSpwan.Count >= 3)
                 {
-                    Draw();
                     Test.isMyturn = !Test.isMyturn;
                     Draw();
                     Test.isMyturn = !Test.isMyturn;
+                    Draw();
                 }
                 break;
             default:
@@ -292,8 +300,9 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void ReyCastReset(bool isMytrun)
+    public IEnumerator ReyCastReset(bool isMytrun,float Delay =0)
     {
+        yield return new WaitForSeconds(Delay);
         foreach (var x in cardsInHand)
         {
             if(isMytrun)
@@ -319,9 +328,11 @@ public class CardManager : MonoBehaviour
         }
         cardsUsed.Clear();
 
+        isEndCardSpawn = false;
         playerDeck = initialDeck.Clone();
         firstCount = playerDeck.deck.Count;
         StartCoroutine(InstantiateCo());
+
     }
 
     public void ResetGame()

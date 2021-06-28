@@ -46,7 +46,6 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(n);
 
         IEnumerable<CardHandler> CardDamage = cardManager.cardsInEnemyHand.OrderBy(x => x.card.damage);
-        //IEnumerable<CardHandler> CardHeal = cardManager.cardsInEnemyHand.OrderBy(x => x.card.heal);
 
         for (int i = 0; i < cardManager.cardsInEnemyHand.Count; i++)
         {
@@ -95,6 +94,6 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator OrderCo()
     {
         yield return null;
-        cardManager.OrderCard(false);
+        StartCoroutine(cardManager.OrderCard(false,false));
     }
 }
