@@ -364,4 +364,9 @@ public class CardManager : MonoBehaviour
         StartCoroutine(InstantiateCo());
         StartCoroutine(FirstDraw());
     }
+
+    public void GotoLastIndex(GameObject gameObject)
+    {
+        gameObject.transform.SetAsLastSibling();
+    }
 }
