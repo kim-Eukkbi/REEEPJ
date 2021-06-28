@@ -219,6 +219,7 @@ public class DamageManager : MonoBehaviour
         Sequence EffectSeq = DOTween.Sequence();
         GameObject effect;
         Text effText;
+
         effect = Instantiate(healOrDealObj, this.gameObject.transform.position, Quaternion.identity, this.gameObject.transform);
         effText = effect.GetComponent<Text>();
         effText.DOFade(1, .01f);
