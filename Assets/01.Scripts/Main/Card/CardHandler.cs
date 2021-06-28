@@ -16,6 +16,7 @@ public class CardHandler : MonoBehaviour
     public GameObject frontCard;
     public Material redMat;
     public Material GreenMat;
+    public Material purpleMat;
 
     private Image thisCard;
 
@@ -44,6 +45,10 @@ public class CardHandler : MonoBehaviour
         {
             case "일격에주님곁으로":
                 cardDamage.text = "Power: 0 or 100";
+                break;
+            case "유니세프":
+                cardDamage.text = "Draw: 2Cards";
+                frontCard.GetComponent<MeshRenderer>().material = purpleMat;
                 break;
         }
     }

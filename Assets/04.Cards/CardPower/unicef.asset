@@ -17,7 +17,7 @@ MonoBehaviour:
   cardDescription: "\uBD88\uC30D\uD55C \uD559\uC0DD\uC744 \uC9C0\uD0A4\uAE30 \uC704\uD55C
     \uAD6D\uC5B4\uC324\uC758 \uC190\uAE38"
   cardDamage: 0
-  cardHeal: 95
+  cardHeal: 0
   seqOnUse: 
   seqOnDraw: 
   seqOnDrop: 

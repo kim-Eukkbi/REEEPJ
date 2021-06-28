@@ -344,6 +344,7 @@ MonoBehaviour:
   frontCard: {fileID: 2274540084001120515}
   redMat: {fileID: 2100000, guid: 0867cc06cb1fada4ab61775e264196ac, type: 2}
   GreenMat: {fileID: 2100000, guid: 30a04e707f0f6714ebc413feea37a7e5, type: 2}
+  purpleMat: {fileID: 2100000, guid: 8498970a3a4fac44f959c98eaf7de28a, type: 2}
 --- !u!114 &7242187899838578744
 MonoBehaviour:
   m_ObjectHideFlags: 0

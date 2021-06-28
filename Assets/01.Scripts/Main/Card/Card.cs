@@ -11,6 +11,7 @@ public class Card : ScriptableObject
 
     public bool isDamageCard;
     public bool isHealCard;
+    public bool isBenefitCard;
 
     public CardPower power;
 
@@ -29,6 +30,7 @@ public class Card : ScriptableObject
         this.heal = power.cardHeal;
         this.isDamageCard = _damageCard;
         this.isHealCard = _healCard;
+        //this.isBenefitCard = _isBenefitCard;
     }
 
     public Card clone()

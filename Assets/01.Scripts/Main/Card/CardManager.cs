@@ -254,7 +254,10 @@ public class CardManager : MonoBehaviour
                     usedCardHandler.card.damage = 0;
                 else
                     usedCardHandler.card.damage = 100;
-
+                break;
+            case "유니세프":
+                Draw();
+                Draw();
                 break;
             default:
                 break;
