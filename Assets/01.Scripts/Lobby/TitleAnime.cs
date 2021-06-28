@@ -27,6 +27,11 @@ public class TitleAnime : MonoBehaviour
     private Vector3 offlineButtonPos;
 
 
+    private void Awake()
+    {
+        //Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
+    }
+
     private void Start()
     {
         ClickPanel.SetActive(false);
@@ -106,7 +111,7 @@ public class TitleAnime : MonoBehaviour
 
     public void OfflineClick()
     {
-        mainSeq.Kill();
+        DOTween.KillAll();
         SceneManager.LoadScene("Main",LoadSceneMode.Single);
     }
 }

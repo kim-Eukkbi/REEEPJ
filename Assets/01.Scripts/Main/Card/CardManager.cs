@@ -215,6 +215,51 @@ public class CardManager : MonoBehaviour
     public void UsedCard(GameObject UsedCard)
     {
         CardHandler usedCardHandler = UsedCard.GetComponent<CardHandler>();
+        switch (usedCardHandler.card.power.cardName)
+        {
+            case "¶òÇø":
+                for(int i =0;i<2;i++)
+                {
+                    if(Test.isMyturn)
+                    {
+                        if(cardsInEnemyHand.Count <= 1)
+                            break;
+
+                        int x = UnityEngine.Random.Range(0, cardsInEnemyHand.Count);
+                        GameObject rCard = cardsInEnemyHand[x].gameObject;
+                        GameObject rPonCard = enemyPonCardList[x].gameObject;
+                        cardsInEnemyHand.RemoveAt(x);
+                        enemyPonCardList.RemoveAt(x);
+                        Destroy(rCard);
+                        Destroy(rPonCard);
+                    }
+                    else
+                    {
+                        if (cardsInHand.Count <= 1)
+                            break;
+
+                        int x = UnityEngine.Random.Range(0, cardsInHand.Count);
+                        GameObject rCard = cardsInHand[x].gameObject;
+                        GameObject rPonCard = ponCardList[x].gameObject;
+                        cardsInHand.RemoveAt(x);
+                        ponCardList.RemoveAt(x);
+                        Destroy(rCard);
+                        Destroy(rPonCard);
+                    }
+                }
+                OrderCard(!Test.isMyturn);
+                break;
+            case "ÀÏ°Ý¿¡ÁÖ´Ô°çÀ¸·Î":
+                int a = UnityEngine.Random.Range(0, 2);
+                if (a.Equals(0))
+                    usedCardHandler.card.damage = 0;
+                else
+                    usedCardHandler.card.damage = 100;
+
+                break;
+            default:
+                break;
+        }
 
         if (Test.isMyturn)
             cardsInHand.Remove(usedCardHandler);

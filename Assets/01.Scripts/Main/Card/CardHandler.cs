@@ -40,10 +40,17 @@ public class CardHandler : MonoBehaviour
             frontCard.GetComponent<MeshRenderer>().material = redMat;
         if (card.isHealCard)
             frontCard.GetComponent<MeshRenderer>().material = GreenMat;
+        switch(drawCard.power.cardName)
+        {
+            case "¿œ∞›ø°¡÷¥‘∞Á¿∏∑Œ":
+                cardDamage.text = "Power: 0 or 100";
+                break;
+        }
     }
 
     public void UseCard()
     {
+       
         if (card.isDamageCard)
         {
             if (DamageManager.Instance.nowDamage <= card.damage)

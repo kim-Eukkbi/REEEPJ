@@ -50,6 +50,8 @@ public class Card : ScriptableObject
                     isHealCard = true;
                 }
                 break;
+            case "¿œ∞›ø°¡÷¥‘∞Á¿∏∑Œ":
+                break;
         }
         card.Init(id, tagString, power, isDamageCard, isHealCard);
         return card;

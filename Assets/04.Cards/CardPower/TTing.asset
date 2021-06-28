@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   illuset: {fileID: 21300000, guid: ebf2c98708fb3c44ead11e5d98aaecd2, type: 3}
   cardName: "\uB775\uD610"
-  cardDescription: "\uC139\uB3C4\uC2DC\uBC1C."
+  cardDescription: "\uC139\uB3C4\uC2DC\uBC1C. \uB2F9\uC2E0\uC740 \uB775\uD610\uC744
+    \uB290\uAF07\uC2B5\uB2C8\uB2E4 \uC0C1\uB300\uBC29\uC758 \uB371\uC5D0\uC11C \uCE74\uB4DC
+    1~2\uC7A5\uC744 \uC9C0\uC6C1\uB2C8\uB2E4. \uD558\uC9C0\uB9CC \uC0C1\uB300\uBC29
+    \uB371\uC5D0 \uCE74\uB4DC\uAC00 1\uC7A5 \uC774\uD558\uB77C\uBA74 \uCE74\uB4DC\uC758
+    \uD6A8\uACFC\uB294 \uBB34\uD6A8\uC785\uB2C8\uB2E4."
   cardDamage: 47
   cardHeal: 0
   seqOnUse: 
