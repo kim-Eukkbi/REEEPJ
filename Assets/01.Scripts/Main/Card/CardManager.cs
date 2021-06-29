@@ -283,6 +283,17 @@ public class CardManager : MonoBehaviour
                 DamageManager.Instance.totalDamage = 0;
                 DamageManager.Instance.Damazing(0);
                 break;
+            case "산타감자":
+                if (cardsOnSpwan.Count >= 3)
+                {
+                    Test.isMyturn = !Test.isMyturn;
+                    Draw();
+                    Draw();
+                    Test.isMyturn = !Test.isMyturn;
+                    Draw();
+                    Draw();
+                }
+                break;
             default:
                 break;
         }
