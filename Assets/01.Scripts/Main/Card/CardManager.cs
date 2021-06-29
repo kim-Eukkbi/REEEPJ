@@ -279,6 +279,10 @@ public class CardManager : MonoBehaviour
                     Draw();
                 }
                 break;
+            case "À®Å©ÀÇ °¡È£":
+                DamageManager.Instance.totalDamage = 0;
+                DamageManager.Instance.Damazing(0);
+                break;
             default:
                 break;
         }

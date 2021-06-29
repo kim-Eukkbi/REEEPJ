@@ -54,6 +54,10 @@ public class CardHandler : MonoBehaviour
                 cardDamage.text = "Draw: 1CardEach";
                 frontCard.GetComponent<MeshRenderer>().material = purpleMat;
                 break;
+            case "À®Å©ÀÇ °¡È£":
+                cardDamage.text = "Reset : totalDamage";
+                frontCard.GetComponent<MeshRenderer>().material = purpleMat;
+                break;
         }
     }
 
